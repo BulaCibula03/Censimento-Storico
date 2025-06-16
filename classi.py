@@ -4,7 +4,7 @@ class persona:
     nome = ""
     cognome = ""
     padre=""
-    eta = 0
+    eta = 0.0
     ruolo = ""
     residenza = ""
     gruppoFamigliare = 0
