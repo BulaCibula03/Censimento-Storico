@@ -269,15 +269,3 @@ def suddivisioneQuartieri(lista):
     return quartieri
 
 print(suddivisioneQuartieri(my_list))
-
-
-
-            
-
-
-
-
-
-
-
-
