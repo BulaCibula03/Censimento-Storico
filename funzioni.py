@@ -182,8 +182,87 @@ def etaPrimoFiglio(lista):
     return eta_primo_figlio
 
 print(etaPrimoFiglio(my_list))
-            
+#mie funzioni            
+def etaServitu(lista):
+    eta_servitu = 0
+    totServi= 0
+    for persona in lista:
+        if persona.ruolo.strip().lower() == "servi" or persona.ruolo.strip().lower() == "serve" or persona.ruolo.strip().lower() == "garzoni":
+            eta_servitu+=persona.eta
+            totServi+=1
+    return eta_servitu/totServi if totServi>0 else 0
 
+print(etaServitu(my_list))
+
+def persoPadri(lista):
+    tot=0
+    trenta=0
+    p=[]
+    for persona in lista:
+        if persona.eta < 30:
+            p.append(persona)
+            trenta+=1
+    for persona in p:
+        if persona.padre.strip().lower().startswith("q"):
+            tot+=1
+    ritorno=[]
+    ritorno.append(tot)
+    ritorno.append((tot/trenta)*100 if trenta > 0 else 0)
+    return ritorno
+    
+print(persoPadri(my_list))
+            
+def numeroGruppiFamigliari(lista):
+    media=[]
+    i=0
+    n=0
+    media.append(0)
+    for persona in lista:
+        if persona.gruppoFamigliare==i:
+            media[i]+=persona.eta
+            n+=1
+        else:
+            media[i]/=n
+            media.append(persona.eta)
+            i+=1
+            n=1
+    media[i]/=n
+    return media
+
+print(numeroGruppiFamigliari(my_list))
+
+def differenzaEtaTraClassi(lista):
+    differenze=[0,0,0]
+    n=0
+    p=0
+    b=0
+    for persona in lista:
+        if "signor" in persona.titolo.lower() or "signora" in persona.titolo.lower() or persona.titolo.lower() == "sig" or persona.titolo.lower() == "sig.ra":
+            differenze[0]+=persona.eta
+            n+=1
+        elif persona.titolo.lower()=="ms" or persona.titolo.lower()=="mna":
+            differenze[1]+=persona.eta
+            b+=1
+        elif persona.titolo.lower()=="nessuno":
+            differenze[2]+=persona.eta
+            p+=1
+    differenze[0]/=n if n > 0 else 0
+    differenze[1]/=b if b > 0 else 0
+    differenze[2]/=p if p > 0 else 0
+    return differenze
+
+print(differenzaEtaTraClassi(my_list))
+
+def suddivisioneQuartieri(lista):
+    quartieri = {}
+    for persona in lista:
+        if persona.residenza.strip().lower() in quartieri:
+            quartieri[persona.residenza.strip().lower()] += 1
+        else:
+            quartieri[persona.residenza.strip().lower()] = 1
+    return quartieri
+
+print(suddivisioneQuartieri(my_list))
 
 
             
