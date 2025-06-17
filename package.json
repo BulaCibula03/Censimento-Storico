@@ -1,0 +1,29 @@
+{
+  "name": "tirocinio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/css/input.css -o ./static/css/output.css --minify",
+    "watch:css": "tailwindcss -i ./src/css/input.css -o ./static/css/output.css --watch",
+    "build": "npm run build:css",
+    "dev": "npm run watch:css & python3 app.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BulaCibula03/Tirocinio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BulaCibula03/Tirocinio/issues"
+  },
+  "homepage": "https://github.com/BulaCibula03/Tirocinio#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.4"
+  }
+}
