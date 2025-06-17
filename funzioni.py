@@ -157,7 +157,7 @@ def differenzaEtaConiugi(lista):
             marito = persona.eta
         elif persona.ruolo.strip().lower() == "moglie":
             moglie = persona.eta
-    # Controlla anche l'ultimo gruppo
+    
     if marito is not None and moglie is not None:
         differenze.append(abs(marito - moglie))
     return differenze
@@ -176,7 +176,7 @@ def etaPrimoFiglio(lista):
             eta_figli = []
         if persona.ruolo.strip().lower() in ["figlio", "figlia"]:
             eta_figli.append(persona.eta)
-    # Controlla anche l'ultimo gruppo
+    
     if eta_figli:
         eta_primo_figlio.append(max(eta_figli))
     return eta_primo_figlio
