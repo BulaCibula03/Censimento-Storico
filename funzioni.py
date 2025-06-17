@@ -1,14 +1,14 @@
 #- nome e cognomi: classifica   //FATTA
-#- Quanti maschi e quante femmine   //DA FARE
+#- Quanti maschi e quante femmine   //FATTA
 #- Età media generale   //FATTA
 #- Suddivisione per titoli: quanti hanno il titolo di ms/mna, quanti sig., quanti nessun titolo…    //FATTA
 #- Età dei servi e delle serve, garzoni     //FATTA
 #- Età media gruppi familiari   //FATTA
 #- Altri dati età: esempio quanti superano i 40 anni?   //FATTA
 #- Quante persone minori di 16 anni     //FATTA
-#- In base all’età quanti maschi e quante femmine   //DA FARE
+#- In base all’età quanti maschi e quante femmine   //da fare
 #- Numero medio componenti gruppi familiari     //FATTA
-#- Struttura nuclei familiari   //DA FARE
+#- Struttura nuclei familiari   //FATTA
 #- Età media della moglie ed età media del marito   //FATTA  
 #- Differenza età marito moglie     //FATTA
 #- Età primo figlio     //FATTA
@@ -269,3 +269,44 @@ def suddivisioneQuartieri(lista):
     return quartieri
 
 print(suddivisioneQuartieri(my_list))
+
+def mediaNumeroGruppiFamiliari(lista):
+    gruppi = []
+    i=0
+    tot=0
+    gruppi.append(0)
+    for persona in lista:
+        if persona.gruppoFamigliare==i:
+            gruppi[i] += 1
+        else:
+            tot+=gruppi[i]
+            gruppi.append(1)
+            i+=1
+    tot += gruppi[i] 
+    return tot/(i+1)
+
+print(mediaNumeroGruppiFamiliari(my_list))
+
+def contaMaschiEFemmine(lista):
+    sesso=[0,0]
+    for persona in lista:
+        ruolo = persona.ruolo.strip().lower()
+        titolo = persona.titolo.strip().lower()
+        nome = persona.nome.strip().lower()
+        
+        if titolo in ["sig", "signor", "ms", "mna", "capofamiglia", "monsignore"]:
+            sesso[0] += 1
+        elif titolo in ["sig.ra", "signora", "vedova", "mater familias"]:
+            sesso[1] += 1
+        elif ruolo in ["figlio", "servo", "nipote", "garzone", "famiglio di stalla", "staffiero"]:
+            sesso[0] += 1
+        elif ruolo in ["figlia", "serva", "nipotina"]:
+            sesso[1] += 1
+        elif nome.endswith("a"):
+            sesso[1] += 1
+        else:
+            sesso[0] += 1
+
+    return sesso
+
+print(contaMaschiEFemmine(my_list))
