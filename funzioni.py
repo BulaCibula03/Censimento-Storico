@@ -190,7 +190,7 @@ def etaServitu(lista):
         if persona.ruolo.strip().lower() == "servi" or persona.ruolo.strip().lower() == "serve" or persona.ruolo.strip().lower() == "garzoni":
             eta_servitu+=persona.eta
             totServi+=1
-    return eta_servitu/totServi if totServi>0 else 0
+    return int(eta_servitu/totServi) if totServi>0 else 0
 
 print(etaServitu(my_list))
 
@@ -207,7 +207,7 @@ def persoPadri(lista):
             tot+=1
     ritorno=[]
     ritorno.append(tot)
-    ritorno.append((tot/trenta)*100 if trenta > 0 else 0)
+    ritorno.append(int((tot/trenta)*100 if trenta > 0 else 0))
     return ritorno
     
 print(persoPadri(my_list))
@@ -220,13 +220,16 @@ def numeroGruppiFamigliari(lista):
     for persona in lista:
         if persona.gruppoFamigliare==i:
             media[i]+=persona.eta
+            media[i]=int(media[i])
             n+=1
         else:
             media[i]/=n
+            media[i]=int(media[i])
             media.append(persona.eta)
             i+=1
             n=1
     media[i]/=n
+    media[i]=int(media[i])
     return media
 
 print(numeroGruppiFamigliari(my_list))
@@ -249,6 +252,9 @@ def differenzaEtaTraClassi(lista):
     differenze[0]/=n if n > 0 else 0
     differenze[1]/=b if b > 0 else 0
     differenze[2]/=p if p > 0 else 0
+    differenze[0] = int(differenze[0])
+    differenze[1] = int(differenze[1])
+    differenze[2] = int(differenze[2])
     return differenze
 
 print(differenzaEtaTraClassi(my_list))
