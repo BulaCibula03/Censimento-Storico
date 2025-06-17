@@ -271,6 +271,7 @@ def suddivisioneQuartieri(lista):
 print(suddivisioneQuartieri(my_list))
 
 
+
             
 
 
