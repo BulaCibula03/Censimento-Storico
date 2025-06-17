@@ -2,20 +2,20 @@
 #- Quanti maschi e quante femmine   //DA FARE
 #- Età media generale   //FATTA
 #- Suddivisione per titoli: quanti hanno il titolo di ms/mna, quanti sig., quanti nessun titolo…    //FATTA
-#- Età dei servi e delle serve, garzoni     //DA FARE
+#- Età dei servi e delle serve, garzoni     //FATTA
 #- Età media gruppi familiari   //FATTA
 #- Altri dati età: esempio quanti superano i 40 anni?   //FATTA
 #- Quante persone minori di 16 anni     //FATTA
 #- In base all’età quanti maschi e quante femmine   //DA FARE
-#- Numero medio componenti gruppi familiari     //DA FARE
+#- Numero medio componenti gruppi familiari     //FATTA
 #- Struttura nuclei familiari   //DA FARE
 #- Età media della moglie ed età media del marito   //FATTA  
 #- Differenza età marito moglie     //FATTA
 #- Età primo figlio     //FATTA
-#- Differenza età dei nobili e dei borghesi e popolo    //DA FARE
+#- Differenza età dei nobili e dei borghesi e popolo    //FATTA
 #- Possibili genealogie, riunendo vicini tutti quelli con stesso cognome e accanto paternità    //DOPO
-#- Quanti hanno già perso il padre? A che età?      //DA FARE
-#- Suddivisione per quartieri (Contrada della Piazza, Ghirolo ecc.)     //DA FARE
+#- Quanti hanno già perso il padre? A che età?      //FATTA
+#- Suddivisione per quartieri (Contrada della Piazza, Ghirolo ecc.)     //FATTA
 from collections import Counter
 from parsing import parse
 import classi
