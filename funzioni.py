@@ -283,11 +283,11 @@ def mediaNumeroGruppiFamiliari(lista):
             gruppi.append(1)
             i+=1
     tot += gruppi[i] 
-    return tot/(i+1)
+    return int(tot/(i+1))
 
 print(mediaNumeroGruppiFamiliari(my_list))
 
-def contaMaschiEFemmine(lista):
+def contaMaschiFemmine(lista):
     sesso=[0,0]
     for persona in lista:
         ruolo = persona.ruolo.strip().lower()
@@ -309,4 +309,4 @@ def contaMaschiEFemmine(lista):
 
     return sesso
 
-print(contaMaschiEFemmine(my_list))
+print(contaMaschiFemmine(my_list))
