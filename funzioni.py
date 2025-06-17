@@ -6,7 +6,7 @@
 #- Età media gruppi familiari   //FATTA
 #- Altri dati età: esempio quanti superano i 40 anni?   //FATTA
 #- Quante persone minori di 16 anni     //FATTA
-#- In base all’età quanti maschi e quante femmine   //da fare
+#- In base all’età quanti maschi e quante femmine   //FATTA
 #- Numero medio componenti gruppi familiari     //FATTA
 #- Struttura nuclei familiari   //FATTA
 #- Età media della moglie ed età media del marito   //FATTA  
@@ -310,3 +310,62 @@ def contaMaschiFemmine(lista):
     return sesso
 
 print(contaMaschiFemmine(my_list))
+
+def trovaMaschi(lista):
+    m=[]
+    for persona in lista:
+        ruolo = persona.ruolo.strip().lower()
+        titolo = persona.titolo.strip().lower()
+        nome = persona.nome.strip().lower()
+        if titolo in ["sig", "signor", "ms", "mna", "capofamiglia", "monsignore"]:
+            m.append(persona)
+        elif ruolo in ["figlio", "servo", "nipote", "garzone", "famiglio di stalla", "staffiero"]:
+            m.append(persona)
+        elif not nome.endswith("a"):
+            m.append(persona)
+    return m
+
+def trovaFemmine(lista):
+    f=[]
+    for persona in lista:
+        ruolo = persona.ruolo.strip().lower()
+        titolo = persona.titolo.strip().lower()
+        nome = persona.nome.strip().lower()
+        if titolo in ["sig.ra", "signora", "vedova", "mater familias"]:
+            f.append(persona)
+        elif ruolo in ["figlia", "serva", "nipotina"]:
+            f.append(persona)
+        elif nome.endswith("a"):
+            f.append(persona)
+    return f
+
+def quantiEtaMaschiEFemmine(lista):
+    fascioEtaMaschile=[0,0,0,0] # 0= 0-14, 1=15-30, 2=31-45, 3=46
+    fascioEtaFemminile=[0,0,0,0] # 0= 0-14, 1=15-30, 2=31-45, 3=46
+    femmine=trovaFemmine(lista)
+    maschi=trovaMaschi(lista)
+
+    for persona in femmine:
+        eta = persona.eta
+        if eta < 15:
+            fascioEtaFemminile[0] += 1
+        elif eta < 31:
+            fascioEtaFemminile[1] += 1
+        elif eta < 46:
+            fascioEtaFemminile[2] += 1
+        else:
+            fascioEtaFemminile[3] += 1
+    for persona in maschi:
+        eta = persona.eta
+        if eta < 15:
+            fascioEtaMaschile[0] += 1
+        elif eta < 31:
+            fascioEtaMaschile[1] += 1
+        elif eta < 46:
+            fascioEtaMaschile[2] += 1
+        else:
+            fascioEtaMaschile[3] += 1
+
+    return fascioEtaFemminile,fascioEtaMaschile
+
+print(quantiEtaMaschiEFemmine(my_list))
