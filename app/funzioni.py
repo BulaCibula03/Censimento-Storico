@@ -17,7 +17,7 @@
 #- Quanti hanno già perso il padre? A che età?      //FATTA
 #- Suddivisione per quartieri (Contrada della Piazza, Ghirolo ecc.)     //FATTA
 from collections import Counter
-from parsing import parse
+from app.parsing import parse
 import classi
 df = parse()
 my_list = []
