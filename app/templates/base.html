@@ -51,6 +51,33 @@
             </main>}--->
             <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
             <script src="{{ url_for('static', filename='script.js') }}"></script> questo se usiamo flask mi dice Chat-->
-            <script src="script.js"></script>
+            <script src="script.js">
+                document.addEventListener("DOMContentLoaded", function () {
+                    fetch("file.csv")
+                        .then(response => response.text())
+                        .then(csvText => {
+                            Papa.parse(csvText, {
+                                header: true,
+                                skipEmptyLines: true,
+                                complete: function(results) {
+                                    const tbody = document.querySelector("table tbody");
+                                    results.data.forEach(row => {
+                                        const tr = document.createElement("tr");
+                                        tr.innerHTML = `
+                                            <td class="px-6 py-4">${row.Titolo || ""}</td>
+                                            <td class="px-6 py-4">${row.Nome || ""}</td>
+                                            <td class="px-6 py-4">${row.Cognome || ""}</td>
+                                            <td class="px-6 py-4">${row["Figlio di"] || ""}</td>
+                                            <td class="px-6 py-4">${row.Eta || ""}</td>
+                                            <td class="px-6 py-4">${row["Professione/Grado di Parentela"] || ""}</td>
+                                            <td class="px-6 py-4">${row.Residenza || ""}</td>
+                                        `;
+                                        tbody.appendChild(tr);
+                                    });
+                                }
+                            });
+                        });
+                });
+            </script>
     </body>
 </html>
