@@ -1,0 +1,61 @@
+    {% extends 'base.html' %}
+        {% block content %}
+            <h1>Informazioni sui Gruppi Famigliari</h1>
+            <p>Numero medio componenti a un gruppo famigliare:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
+            <div id="controls-carousel" class="relative w-full" data-carousel="static">
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                    <div class="duration-700 ease-in-out" data-carousel-item>
+                        <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Titolo
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Nome
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Cognome
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Figlio di
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Eta
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Professione/Grado di Parentela
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Residenza
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none" data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-2 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-3 h-3 text-white dark:text-gray-800 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none" data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-2 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-3 h-3 text-white dark:text-gray-800 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
+            <ul>
+                <li><p>Differenza d'età tra marito e moglie:</p><textarea name="testo" rows="2" cols="20" readonly></textarea></li>
+                <li><p>Età del primo Figlio:</p><textarea name="testo" rows="2" cols="20" readonly></textarea></li>
+            </ul>
+        {% endblock %}

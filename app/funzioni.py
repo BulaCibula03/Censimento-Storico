@@ -262,10 +262,11 @@ print(differenzaEtaTraClassi(my_list))
 def suddivisioneQuartieri(lista):
     quartieri = {}
     for persona in lista:
-        if persona.residenza.strip().lower() in quartieri:
-            quartieri[persona.residenza.strip().lower()] += 1
+        quartiere = persona.residenza.strip().lower()
+        if quartiere in quartieri:
+            quartieri[quartiere].append(persona.nome)
         else:
-            quartieri[persona.residenza.strip().lower()] = 1
+            quartieri[quartiere] = [persona.nome]
     return quartieri
 
 print(suddivisioneQuartieri(my_list))
