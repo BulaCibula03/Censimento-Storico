@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+        {% block content %}
+            <h1>Abitanti di Crema nel 1592-93</h1>
+            <div class="relative overflow-x-auto">
+                <table name="frequenzaNomi" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Frequency
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="relative overflow-x-auto">
+                <table name="frequenzaCognomi" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Username
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Frequency
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="relative overflow-x-auto">
+                <table name="frequenzaTitoli" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Title
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Frequency
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="relative overflow-x-auto">
+                <table name="personeInQuartiere" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                District
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Inhabitants 
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+            <script>
+                const names="";
+                const user="";
+                const titles="";
+                const  district="";
+
+                function popolaTabella(nomeTabella, dati) {
+                    const tbody = document.querySelector(`table[name="${nomeTabella}"] tbody`);
+                    tbody.innerHTML = "";
+                    dati.forEach(info => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `<td>${info.valore}</td><td>${info.frequenza}</td>`;
+                        tbody.appendChild(tr);
+                    });
+                }
+
+                popolaTabella("frequenzaNomi", names);
+                popolaTabella("frequenzaCognomi", user);
+                popolaTabella("frequenzaTitoli", titles);
+                popolaTabella("personeInQuartiere", district);
+            </script>
+        {% endblock %}
