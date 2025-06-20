@@ -370,3 +370,17 @@ def quantiEtaMaschiEFemmine(lista):
     return fascioEtaFemminile,fascioEtaMaschile
 
 print(quantiEtaMaschiEFemmine(my_list))
+
+def strutturaFamigliare(lista):
+    gruppo=[]
+    struttura=[]
+    for persona in lista:
+        if persona.ruolo.strip().lower() in ["capofamiglia", "mater familias", "vedova", "capofamiglia vedovo", "moglie", "marito"]:
+            if struttura:
+                gruppo.append(struttura)
+            struttura = []
+        struttura.append(persona)
+    if struttura:
+        gruppo.append(struttura)
+    return gruppo
+print(strutturaFamigliare(my_list))
