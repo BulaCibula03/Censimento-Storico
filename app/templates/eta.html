@@ -1,26 +1,114 @@
 {% extends 'base.html' %}
-    {% block content %}        
+    {% block content %}       
+            <h1>INFORMAZIONI SU L'ETÀ</h1> 
             <div class="contenutoEta">
-                <h1>INFORMAZIONI SU L'ETÀ</h1>
-                <p>Età generale:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Età media della servitù:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Età media dei gruppi famigliari:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Età media delle mogli:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Età media dei mariti:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Età media dei nobili:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Età media dei borghesi:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Età media del popolo:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Quantità di persone sopra i 40 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Quantità di persone sotto i 16 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
+                <div><p>Età generale:</p><textarea name="etaGenerale" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Età media della servitù:</p><textarea name="etaServitu" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Età media dei gruppi famigliari:</p><textarea name="etaGruppi" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Età media delle mogli:</p><textarea name="etaMogli" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Età media dei mariti:</p><textarea name="etaMariti" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Età media dei nobili:</p><textarea name="etaNobili" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Età media dei borghesi:</p><textarea name="etaBorghesi" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Età media del popolo:</p><textarea name="etaPopolo" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Quantità di persone sopra i 40 anni:</p><textarea name="sopraQuaranta" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Quantità di persone sotto i 16 anni:</p><textarea name="sottoSedici" rows="2" cols="20" readonly></textarea></div>
                 <h2>Età media delle feminile</h2>
-                <p>Nella fascia d'età inferiore ai 14 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Nella fascia d'età dai 15 anni ai 30 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Nella fascia d'età dai 31 ai 45 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Nella fascia d'età superiori ai 46 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea> 
+                <div><p>Nella fascia d'età inferiore ai 14 anni:</p><textarea name="f1" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Nella fascia d'età dai 15 anni ai 30 anni:</p><textarea name="f2" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Nella fascia d'età dai 31 ai 45 anni:</p><textarea name="f3" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Nella fascia d'età superiori ai 46 anni:</p><textarea name="f4" rows="2" cols="20" readonly></textarea> </div>
                 <h2>Età media dei maschi</h2>
-                <p>Nella fascia d'età inferiore ai 14 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Nella fascia d'età dai 15 anni ai 30 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Nella fascia d'età dai 31 ai 45 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
-                <p>Nella fascia d'età superiori ai 46 anni:</p><textarea name="testo" rows="2" cols="20" readonly></textarea> 
+                <div><p>Nella fascia d'età inferiore ai 14 anni:</p><textarea name="m1" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Nella fascia d'età dai 15 anni ai 30 anni:</p><textarea name="m2" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Nella fascia d'età dai 31 ai 45 anni:</p><textarea name="m3" rows="2" cols="20" readonly></textarea></div>
+                <div><p>Nella fascia d'età superiori ai 46 anni:</p><textarea name="m4" rows="2" cols="20" readonly></textarea> </div>
             </div>
+            <script>
+                const etaGenerale = {{ eta_generale }};
+                const textarea = document.querySelector('textarea[name="etaGenerale"]');
+                textarea.value = etaGenerale;
+
+                const etaServitu = {{ eta_servitu }};
+                const textarea2 = document.querySelector('textarea[name="etaServitu"]');
+                textarea2.value = etaServitu;
+
+                const etaGruppi = {{ eta_gruppi }};
+                const textarea3 = document.querySelector('textarea[name="etaGruppi"]');
+                textarea3.value = etaGruppi;
+
+                const etaMogli = {{ eta_mogli }};
+                const textarea4 = document.querySelector('textarea[name="etaMogli"]');
+                textarea4.value = etaMogli;
+
+                const etaMariti = {{ eta_mariti }};
+                const textarea5 = document.querySelector('textarea[name="etaMariti"]');
+                textarea5.value = etaMariti;
+
+                const etaNobili = {{ eta_nobili }};
+                const textarea6 = document.querySelector('textarea[name="etaNobili"]');
+                textarea6.value = etaNobili;
+
+                const etaBorghesi = {{ eta_borghesi }};
+                const textarea7 = document.querySelector('textarea[name="etaBorghesi"]');
+                textarea7.value = etaBorghesi;
+
+                const etaPopolo = {{ eta_popolo }};
+                const textarea8 = document.querySelector('textarea[name="etaPopolo"]');
+                textarea8.value = etaPopolo;
+
+                const sopraQuaranta = {{ sopra_quaranta }};
+                const textarea9 = document.querySelector('textarea[name="sopraQuaranta"]');
+                textarea9.value = sopraQuaranta;
+
+                const sottoSedici = {{ sotto_sedici }};
+                const textarea10 = document.querySelector('textarea[name="sottoSedici"]');
+                textarea10.value = sottoSedici;
+
+                const f1 = {{ f1 }};
+                const textarea11 = document.querySelector('textarea[name="f1"]');
+                textarea11.value = f1;
+
+                const f2 = {{ f2 }};
+                const textarea12 = document.querySelector('textarea[name="f2"]');
+                textarea12.value = f2;
+
+                const f3 = {{ f3 }};
+                const textarea13 = document.querySelector('textarea[name="f3"]');
+                textarea13.value = f3;
+
+                const f4 = {{ f4 }};
+                const textarea14 = document.querySelector('textarea[name="f4"]');
+                textarea14.value = f4;
+
+                const m1 = {{ m1 }};
+                const textarea15 = document.querySelector('textarea[name="m1"]');
+                textarea15.value = m1;
+
+                const m2 = {{ m2 }};
+                const textarea16 = document.querySelector('textarea[name="m2"]');
+                textarea16.value = m2;
+
+                const m3 = {{ m3 }};
+                const textarea17 = document.querySelector('textarea[name="m3"]');
+                textarea17.value = m3;
+
+                const m4 = {{ m4 }};
+                const textarea18 = document.querySelector('textarea[name="m4"]');
+                textarea18.value = m4;
+            </script>
+            <style>
+                .contenutoEta p {
+                    margin-right: 10px;
+                    margin-bottom: 2px;
+                }
+
+                .contenutoEta textarea {
+                    resize: none;         
+                    width: 200px;         
+                    height: 40px;
+                }
+                div{
+                    margin-bottom: 20px;
+                }
+            </style>
         {% endblock %}

@@ -46,51 +46,6 @@
                 {% block content %}
                 {% endblock %}
             </main>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    fetch("{{ url_for('static', filename='file.csv') }}")
-                        .then(response => response.text())
-                        .then(csvText => {
-                            Papa.parse(csvText, {
-                                header: true,
-                                skipEmptyLines: true,
-                                complete: function(results) {
-                                    const tbody = document.querySelector("table tbody");
-                                    results.data.forEach(row => {
-                                        const tr = document.createElement("tr");
-                                        tr.innerHTML = `
-                                            <td class="px-6 py-4">${row.Titolo || ""}</td>
-                                            <td class="px-6 py-4">${row.Nome || ""}</td>
-                                            <td class="px-6 py-4">${row.Cognome || ""}</td>
-                                            <td class="px-6 py-4">${row["Figlio di"] || ""}</td>
-                                            <td class="px-6 py-4">${row.Eta || ""}</td>
-                                            <td class="px-6 py-4">${row["Professione/Grado di Parentela"] || ""}</td>
-                                            <td class="px-6 py-4">${row.Residenza || ""}</td>
-                                        `;
-                                        tbody.appendChild(tr);
-                                    });
-                                }
-                            });
-                        });
-                });
-            </script>
-            <style>
-                .contenutoEta{
-                    display: flex;
-                    align-items: center;
-                }
-
-                .contenutoEta p {
-                    margin-right: 10px;
-                    margin-bottom: 0;
-                }
-
-                .contenutoEta textarea {
-                    resize: none;         
-                    width: 150px;         
-                    height: 40px;
-                }
-            </style>
+            
     </body>
 </html>
