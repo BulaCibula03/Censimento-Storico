@@ -18,7 +18,7 @@
 #- Suddivisione per quartieri (Contrada della Piazza, Ghirolo ecc.)     //FATTA
 from collections import Counter
 from app.parsing import parse
-import classi
+from . import classi
 df = parse()
 my_list = []
 
