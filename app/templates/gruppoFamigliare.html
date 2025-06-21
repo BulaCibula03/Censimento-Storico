@@ -5,7 +5,7 @@
             <div id="controls-carousel" class="relative w-full" data-carousel="static">
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                     <div class="duration-700 ease-in-out" data-carousel-item>
-                        <table name="gruppoFamigliare" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                        <table name="strutturaFamiglia" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
@@ -61,13 +61,52 @@
                 </ul>
             </div>
                 <script>
-                    const diff="";
-                    const textarea=document.querySelector('textarea[name="diffMaritoEMoglie"]');
-                    textarea.value=diff;
-                    const etaPrimoFiglio="";
-                    const textarea=document.querySelector('textarea[name="etaPrimoFiglio"]');
-                    textarea.value=etaPrimoFiglio;
-                    
+                    let gruppiFamigliari = [];
+                    let currentGroupIndex = 0;
+
+                    function mostraGruppo(index) {
+                        const membri=gruppiFamigliari[index];
+                        const tbody=document.querySelector('table[name="strutturaFamiglia"] tbody');
+                        tbody.innerHTML="";
+                            membri.forEach(row => {
+                                const tr=document.createElement("tr");
+                                tr.innerHTML= `
+                                    <td class="px-6 py-4">${row.Titolo || ""}</td>
+                                    <td class="px-6 py-4">${row.Nome || ""}</td>
+                                    <td class="px-6 py-4">${row.Cognome || ""}</td>
+                                    <td class="px-6 py-4">${row["Figlio di"] || ""}</td>
+                                    <td class="px-6 py-4">${row.Eta || ""}</td>
+                                    <td class="px-6 py-4">${row["Professione/Grado di Parentela"] || ""}</td>
+                                    <td class="px-6 py-4">${row.Residenza || ""}</td>
+                                `;
+                                tbody.appendChild(tr);
+                            });
+                            aggiornaInfoGruppo(membri);
+                        }
+                        document.addEventListener("DOMContentLoaded", function () {
+                            fetch("/api/gruppi")
+                                .then(response => response.json())
+                                .then(data => {
+                                    gruppiFamigliari = data;
+                                    mostraGruppo(currentGroupIndex);
+                                });
+
+                            document.querySelector('[data-carousel-next]').addEventListener('click', () => {
+                                currentGroupIndex = (currentGroupIndex + 1) % gruppiFamigliari.length;
+                                mostraGruppo(currentGroupIndex);
+                            });
+
+                            document.querySelector('[data-carousel-prev]').addEventListener('click', () => {
+                                currentGroupIndex = (currentGroupIndex - 1 + gruppiFamigliari.length) % gruppiFamigliari.length;
+                                mostraGruppo(currentGroupIndex);
+                            });
+                        });
+                        const diff="";
+                        const textdiff=document.querySelector('textarea[name="diffMaritoEMoglie"]');
+                        textdiff.value=diff;
+                        const etaPrimoFiglio="";
+                        const textfiglio=document.querySelector('textarea[name="etaPrimoFiglio"]');
+                        textfiglio.value=etaPrimoFiglio;   
                 </script>
             <style>
                 .contenutoInfoGruppi p{
