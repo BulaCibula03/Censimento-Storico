@@ -78,15 +78,17 @@ def mediaEtaGruppiFamigliari(lista):
     gruppo = 0
     tot = 0
     n = 0
-    medie = []
+    medie = {}
     for persona in lista:
         if persona.gruppoFamigliare != gruppo:
-            medie.append(int(tot/n))
+            medie[gruppo] = int(tot/n)
             tot=0
             n=0
             gruppo+=1
         tot+=persona.eta
         n+=1
+    if n > 0:
+        medie[gruppo] = int(tot/n)
     return medie
 
 print(mediaEtaGruppiFamigliari(my_list))
@@ -182,15 +184,19 @@ def etaPrimoFiglio(lista):
     return eta_primo_figlio
 
 print(etaPrimoFiglio(my_list))
-#mie funzioni            
+          
 def etaServitu(lista):
     eta_servitu = 0
-    totServi= 0
+    totServi = 0
+    ruoli_servitu = [
+        "servo", "serva", "servitore", "servitrice", "garzone", "staffiero",
+        "sguattero", "famiglio di stalla", "servi", "serve", "garzoni"
+    ]
     for persona in lista:
-        if persona.ruolo.strip().lower() == "servi" or persona.ruolo.strip().lower() == "serve" or persona.ruolo.strip().lower() == "garzoni":
-            eta_servitu+=persona.eta
-            totServi+=1
-    return int(eta_servitu/totServi) if totServi>0 else 0
+        if persona.ruolo.strip().lower() in ruoli_servitu:
+            eta_servitu += persona.eta
+            totServi += 1
+    return int(eta_servitu / totServi) if totServi > 0 else 0
 
 print(etaServitu(my_list))
 
@@ -234,6 +240,7 @@ def numeroGruppiFamigliari(lista):
 
 print(numeroGruppiFamigliari(my_list))
 
+"""""""""
 def differenzaEtaTraClassi(lista):
     differenze=[0,0,0]
     n=0
@@ -256,6 +263,27 @@ def differenzaEtaTraClassi(lista):
     differenze[1] = int(differenze[1])
     differenze[2] = int(differenze[2])
     return differenze
+"""""""""""
+def differenzaEtaTraClassi(lista):
+    eta_nobili = []
+    eta_borghesi = []
+    eta_popolo = []
+    for persona in lista:
+        titolo = persona.titolo.strip().lower()
+
+        if any(t in titolo for t in ["signor", "signora", "sig.", "sig", "sig.ra"]):
+            eta_nobili.append(persona.eta)
+
+        elif titolo in ["ms", "mna"]:
+            eta_borghesi.append(persona.eta)
+
+        elif titolo == "nessuno" or persona.ruolo.strip().lower() in ["servo", "serva", "servitore", "servitrice", "garzone", "staffiero"]:
+            eta_popolo.append(persona.eta)
+
+    media_nobili = int(sum(eta_nobili)/len(eta_nobili)) if eta_nobili else 0
+    media_borghesi = int(sum(eta_borghesi)/len(eta_borghesi)) if eta_borghesi else 0
+    media_popolo = int(sum(eta_popolo)/len(eta_popolo)) if eta_popolo else 0
+    return [media_nobili, media_borghesi, media_popolo]
 
 print(differenzaEtaTraClassi(my_list))
 
