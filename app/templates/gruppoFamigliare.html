@@ -1,11 +1,11 @@
     {% extends 'base.html' %}
         {% block content %}
             <h1>Informazioni sui Gruppi Famigliari</h1>
-            <p>Numero medio componenti a un gruppo famigliare:</p><textarea name="testo" rows="2" cols="20" readonly></textarea>
+            <div class="numeroComponenti"><p>Numero medio componenti a un gruppo famigliare:</p><textarea name="testo" rows="2" cols="20" readonly></textarea></div>
             <div id="controls-carousel" class="relative w-full" data-carousel="static">
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                     <div class="duration-700 ease-in-out" data-carousel-item>
-                        <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                        <table name="gruppoFamigliare" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
@@ -54,8 +54,43 @@
                     </span>
                 </button>
             </div>
-            <ul>
-                <li><p>Differenza d'età tra marito e moglie:</p><textarea name="testo" rows="2" cols="20" readonly></textarea></li>
-                <li><p>Età del primo Figlio:</p><textarea name="testo" rows="2" cols="20" readonly></textarea></li>
-            </ul>
+            <div class="contenutoInfoGruppi">
+                <ul>
+                    <li><p>Differenza d'età tra marito e moglie:</p><textarea name="diffMaritoEMoglie" rows="2" cols="20" readonly></textarea></li>
+                    <li><p>Età del primo Figlio:</p><textarea name="etaPrimoFiglio" rows="2" cols="20" readonly></textarea></li>
+                </ul>
+            </div>
+                <script>
+                    const diff="";
+                    const textarea=document.querySelector('textarea[name="diffMaritoEMoglie"]');
+                    textarea.value=diff;
+                    const etaPrimoFiglio="";
+                    const textarea=document.querySelector('textarea[name="etaPrimoFiglio"]');
+                    textarea.value=etaPrimoFiglio;
+                    
+                </script>
+            <style>
+                .contenutoInfoGruppi p{
+                    margin-right:10px;
+                    margin-bottom:2px;
+                }
+
+                .contenutoInfoGruppi textarea{
+                    resize:none;         
+                    width:200px;         
+                    height:40px;
+                }
+                div{
+                    margin-bottom:20px;
+                }
+                .numeroComponenti p{
+                    margin-right:10px;
+                    margin-bottom:2px;
+                }
+                .numeroComponenti textarea{
+                    resize:none;         
+                    width:200px;         
+                    height:40px;
+                }
+            </style>
         {% endblock %}

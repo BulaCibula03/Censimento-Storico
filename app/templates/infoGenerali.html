@@ -77,8 +77,8 @@
                 const  district="";
 
                 function popolaTabella(nomeTabella, dati) {
-                    const tbody = document.querySelector(`table[name="${nomeTabella}"] tbody`);
-                    tbody.innerHTML = "";
+                    const tbody=document.querySelector(`table[name="${nomeTabella}"] tbody`);
+                    tbody.innerHTML="";
                     dati.forEach(info => {
                         const tr=document.createElement("tr");
                         const tdValore=document.createElement("td");
