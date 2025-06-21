@@ -16,3 +16,7 @@ def eta():
 @bp.route('/gruppo', methods=['GET'])
 def gruppo():
     return render_template('gruppoFamigliare.html')
+
+@bp.route('/info', methods=['GET'])
+def info():
+    return render_template('infoGenerali.html')
