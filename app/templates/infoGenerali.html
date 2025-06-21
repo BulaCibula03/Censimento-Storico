@@ -80,12 +80,16 @@
                     const tbody = document.querySelector(`table[name="${nomeTabella}"] tbody`);
                     tbody.innerHTML = "";
                     dati.forEach(info => {
-                        const tr = document.createElement("tr");
-                        tr.innerHTML = `<td>${info.valore}</td><td>${info.frequenza}</td>`;
+                        const tr=document.createElement("tr");
+                        const tdValore=document.createElement("td");
+                        tdValore.textContent=info.valore;
+                        const tdFrequenza=document.createElement("td");
+                        tdFrequenza.textContent=info.frequenza;
+                        tr.appendChild(tdValore);
+                        tr.appendChild(tdFrequenza);
                         tbody.appendChild(tr);
                     });
                 }
-
                 popolaTabella("frequenzaNomi", names);
                 popolaTabella("frequenzaCognomi", user);
                 popolaTabella("frequenzaTitoli", titles);
