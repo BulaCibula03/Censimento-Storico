@@ -1,103 +1,372 @@
 {% extends 'base.html' %}
-        {% block content %}
-            <h1>Abitanti di Crema nel 1592-93</h1>
-            <div class="relative overflow-x-auto">
-                <table name="frequenzaNomi" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+    {% block content %}
+        <h1 class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 dark:text-white">Abitanti di Crema nel 1592-93</h1>
+        <!--<section class="flex items-center h-30">
+            <div class="w-full max-w-screen-xl px-4 mx-auto lg:px-12">
+                <div class="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+                <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+                    <div class="w-full md:w-1/2">
+                    <form class="flex items-center">
+                        <label for="simple-search" class="sr-only">Search</label>
+                        <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input type="text" id="simple-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                        </div>
+                    </form>
+                    </div>
+                    <div class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+                    <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                        </svg>
+                        Add product
+                    </button>
+                    <div class="flex items-center w-full space-x-3 md:w-auto">
+                        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-4 h-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
+                        </svg>
+                        Filter/Order
+                        <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                        </svg>
+                        </button>
+                        <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                        <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                            Categoria
+                        </h6>
+                        <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                            <li class="flex items-center">
+                            <input id="maschi" type="checkbox" value=""
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                            <label for="maschi" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                Maschi
+                            </label>
+                            </li>
+                            <li class="flex items-center">
+                            <input id="femmine" type="checkbox" value=""
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                            <label for="femmine" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                Femmine
+                            </label>
+                            </li>
+                            <li class="flex items-center">
+                            <input id="quartieri" type="checkbox" value=""
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                            <label for="quartieri" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                Quartieri
+                            </label>
+                            </li>
+                            <li class="flex items-center">
+                            <input id="padri" type="checkbox" value=""
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                            <label for="padri" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                Padre deceduto
+                            </label>
+                            </li>
+                        </ul>
+                        <br>
+                        <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                            Classifica
+                        </h6>
+                        <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                            <li class="flex items-center">
+                            <input id="nomi" type="checkbox" value=""
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                            <label for="nomi" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                Nomi
+                            </label>
+                            </li>
+                            <li class="flex items-center">
+                            <input id="cognomi" type="checkbox" value=""
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                            <label for="cognomi" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                Cognomi
+                            </label>
+                            </li>
+                            <li class="flex items-center">
+                            <input id="titoli" type="checkbox" value=""
+                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                            <label for="titoli" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                Titoli
+                            </label>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <section>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Name
+                                Gruppo Famigliare
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Frequency
+                                Nome
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Cognome
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Titolo
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Età
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Padre
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Ruolo
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Residenza
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
-            <div class="relative overflow-x-auto">
-                <table name="frequenzaCognomi" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Username
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Frequency
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
+        </section>-->
+        <section class="p-3 bg-gray-50 dark:bg-gray-900 sm:p-5">
+            <div class="max-w-screen-xl px-4 mx-auto lg:px-12">
+                <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+                    <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+                        <div class="w-full md:w-1/2">
+                            <form class="flex items-center">
+                                <label for="simple-search" class="sr-only">Search</label>
+                                <div class="relative w-full">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <input type="text" id="simple-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+                            <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                                <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                                </svg>
+                                Add product
+                            </button>
+                            <div class="flex items-center w-full space-x-3 md:w-auto">
+                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-4 h-4 mr-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
+                                    </svg>
+                                    Filter/Order
+                                    <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                                    </svg>
+                                </button>
+                                <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Categoria</h6>
+                                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                        <li class="flex items-center">
+                                            <input id="maschi" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="maschi" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Maschi</label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="femmine" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="femmine" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Femmine</label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="quartieri" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="quartieri" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Quartieri</label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="padri" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="padri" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Padre deceduto</label>
+                                        </li>
+                                    </ul>
+                                    <br>
+                                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Classifica</h6>
+                                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                        <li class="flex items-center">
+                                            <input id="nomi" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="nomi" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Nomi</label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="cognomi" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="cognomi" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Cognomi</label>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input id="titoli" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                            <label for="titoli" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Titoli</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Gruppo Famigliare</th>
+                                    <th scope="col" class="px-6 py-3">Nome</th>
+                                    <th scope="col" class="px-6 py-3">Cognome</th>
+                                    <th scope="col" class="px-6 py-3">Titolo</th>
+                                    <th scope="col" class="px-6 py-3">Età</th>
+                                    <th scope="col" class="px-6 py-3">Padre</th>
+                                    <th scope="col" class="px-6 py-3">Ruolo</th>
+                                    <th scope="col" class="px-6 py-3">Residenza</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Popolamento dinamico via JS -->
+                            </tbody>
+                        </table>
+                        <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
+                            <span id="pagination-info" class="text-sm font-normal text-gray-500 dark:text-gray-400"></span>
+                            <ul id="pagination-bar" class="inline-flex items-stretch -space-x-px"></ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
-            <div class="relative overflow-x-auto">
-                <table name="frequenzaTitoli" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Title
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Frequency
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        </section>
+        <script>
+            let allData = [];
+            let gruppiInfo = {};
+            let currentPage = 1;
+            const rowsPerPage = 10;
 
-                    </tbody>
-                </table>
-            </div>
-            <div class="relative overflow-x-auto">
-                <table name="personeInQuartiere" class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                District
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Inhabitants 
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            function getFilters() {
+                const filters = [];
+                if (document.getElementById('maschi').checked) filters.push('maschi=1');
+                if (document.getElementById('femmine').checked) filters.push('femmine=1');
+                if (document.getElementById('quartieri').checked) filters.push('quartieri=1');
+                if (document.getElementById('padri').checked) filters.push('padri=1');
+                if (document.getElementById('nomi').checked) filters.push('nomi=1');
+                if (document.getElementById('cognomi').checked) filters.push('cognomi=1');
+                if (document.getElementById('titoli').checked) filters.push('titoli=1');
+                return filters.length ? '?' + filters.join('&') : '';
+            }
 
-                    </tbody>
-                </table>
-            </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-            <script>
-                const names="";
-                const user="";
-                const titles="";
-                const  district="";
+            function renderTablePage(page) {
+                const tbody = document.querySelector("table tbody");
+                tbody.innerHTML = "";
+                let lastGroup = null;
+                let start = (page - 1) * rowsPerPage;
+                let end = start + rowsPerPage;
+                let shown = 0;
+                for (let i = start; i < allData.length && shown < rowsPerPage; i++) {
+                    const persona = allData[i];
+                    if (lastGroup !== persona.gruppo_famigliare) {
+                        lastGroup = persona.gruppo_famigliare;
+                        const info = gruppiInfo[persona.gruppo_famigliare];
+                        const trSection = document.createElement("tr");
+                        trSection.className = "bg-blue-200 dark:bg-blue-900 text-lg font-bold text-blue-900 dark:text-white";
+                        trSection.innerHTML = `
+                            <td class="px-6 py-4" colspan="2">Gruppo ${info.numero}</td>
+                            <td class="px-6 py-4" colspan="2">Componenti: ${info.media_componenti}</td>
+                            <td class="px-6 py-4" colspan="2">Diff. età marito-moglie: ${info.diff_eta}</td>
+                            <td class="px-6 py-4" colspan="2">Età primo figlio: ${info.eta_primo_figlio}</td>
+                        `;
+                        tbody.appendChild(trSection);
+                    }
+                    const tr = document.createElement("tr");
+                    tr.className = "border-b border-gray-200 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700";
+                    tr.innerHTML = `
+                        <th scope="row" class="min-h-[3rem] h-12 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">${persona.gruppo_famigliare}</th>
+                        <td class="min-h-[3rem] h-12 px-6 py-4">${persona.nome}</td>
+                        <td class="min-h-[3rem] h-12 px-6 py-4">${persona.cognome}</td>
+                        <td class="min-h-[3rem] h-12 px-6 py-4">${persona.titolo}</td>
+                        <td class="min-h-[3rem] h-12 px-6 py-4">${persona.eta}</td>
+                        <td class="min-h-[3rem] h-12 px-6 py-4">${persona.padre}</td>
+                        <td class="min-h-[3rem] h-12 px-6 py-4">${persona.ruolo}</td>
+                        <td class="min-h-[3rem] h-12 px-6 py-4">${persona.residenza}</td>
+                    `;
+                    tbody.appendChild(tr);
+                    shown++;
+                }
+                updatePagination(page);
+            }
 
-                function popolaTabella(nomeTabella, dati) {
-                    const tbody=document.querySelector(`table[name="${nomeTabella}"] tbody`);
-                    tbody.innerHTML="";
-                    dati.forEach(info => {
-                        const tr=document.createElement("tr");
-                        const tdValore=document.createElement("td");
-                        tdValore.textContent=info.valore;
-                        const tdFrequenza=document.createElement("td");
-                        tdFrequenza.textContent=info.frequenza;
-                        tr.appendChild(tdValore);
-                        tr.appendChild(tdFrequenza);
-                        tbody.appendChild(tr);
+            function updatePagination(page) {
+                const totalRows = allData.length;
+                const totalPages = Math.ceil(totalRows / rowsPerPage);
+                const pagBar = document.getElementById("pagination-bar");
+                const pagInfo = document.getElementById("pagination-info");
+                pagBar.innerHTML = "";
+
+                pagInfo.innerHTML = `Mostrati <span class="font-semibold text-gray-900 dark:text-white">${(page-1)*rowsPerPage+1}-${Math.min(page*rowsPerPage, totalRows)}</span> di <span class="font-semibold text-gray-900 dark:text-white">${totalRows}</span>`;
+
+                // First page <<
+                const firstLi = document.createElement("li");
+                firstLi.innerHTML = `<a href="#" class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" title="Prima pagina">&laquo;</a>`;
+                firstLi.onclick = (e) => { e.preventDefault(); if (page !== 1) { currentPage = 1; renderTablePage(currentPage); } };
+                pagBar.appendChild(firstLi);
+
+                // Previous
+                const prevLi = document.createElement("li");
+                prevLi.innerHTML = `<a href="#" class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" title="Pagina precedente"><span class="sr-only">Previous</span><svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg></a>`;
+                prevLi.onclick = (e) => { e.preventDefault(); if (page > 1) { currentPage--; renderTablePage(currentPage); } };
+                pagBar.appendChild(prevLi);
+
+                // Page numbers (show max 5)
+                let startPage = Math.max(1, page - 2);
+                let endPage = Math.min(totalPages, page + 2);
+                if (page <= 3) endPage = Math.min(5, totalPages);
+                if (page >= totalPages - 2) startPage = Math.max(1, totalPages - 4);
+                for (let p = startPage; p <= endPage; p++) {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight ${p === page ? 'z-10 text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'}">${p}</a>`;
+                    li.onclick = (e) => { e.preventDefault(); currentPage = p; renderTablePage(currentPage); };
+                    pagBar.appendChild(li);
+                }
+
+                // Dots ... (no last page number)
+                if (endPage < totalPages) {
+                    const dotsLi = document.createElement("li");
+                    dotsLi.innerHTML = `<span class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">...</span>`;
+                    pagBar.appendChild(dotsLi);
+                }
+
+                // Next
+                const nextLi = document.createElement("li");
+                nextLi.innerHTML = `<a href="#" class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" title="Pagina successiva"><span class="sr-only">Next</span><svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></a>`;
+                nextLi.onclick = (e) => { e.preventDefault(); if (page < totalPages) { currentPage++; renderTablePage(currentPage); } };
+                pagBar.appendChild(nextLi);
+
+                // Last page >>
+                const lastArrowLi = document.createElement("li");
+                lastArrowLi.innerHTML = `<a href="#" class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" title="Ultima pagina">&raquo;</a>`;
+                lastArrowLi.onclick = (e) => { e.preventDefault(); if (page !== totalPages) { currentPage = totalPages; renderTablePage(currentPage); } };
+                pagBar.appendChild(lastArrowLi);
+            }
+
+            function aggiornaTabella() {
+                fetch("/api/abitanti" + getFilters())
+                    .then(response => response.json())
+                    .then(result => {
+                        allData = result.abitanti;
+                        gruppiInfo = result.gruppi_info;
+                        currentPage = 1;
+                        renderTablePage(currentPage);
                     });
-                }
-                popolaTabella("frequenzaNomi", names);
-                popolaTabella("frequenzaCognomi", user);
-                popolaTabella("frequenzaTitoli", titles);
-                popolaTabella("personeInQuartiere", district);
-            </script>
-            <style>
-                table{
-                    color:white
-                }
-            </style>      
-        {% endblock %}
+            }
+
+            ['maschi','femmine','quartieri','padri','nomi','titoli'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('change', aggiornaTabella);
+            });
+
+            aggiornaTabella();
+        </script>
+    {% endblock %}

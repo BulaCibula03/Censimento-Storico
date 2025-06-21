@@ -142,7 +142,7 @@ print(etaMediaConiugi(my_list))
 
 def differenzaEtaConiugi(lista):
     lista = sorted(lista, key=lambda x: x.gruppoFamigliare)
-    differenze = []
+    differenze = {}
     if not lista:
         return differenze
     gruppo_corrente = lista[0].gruppoFamigliare
@@ -151,7 +151,7 @@ def differenzaEtaConiugi(lista):
     for persona in lista:
         if persona.gruppoFamigliare != gruppo_corrente:
             if marito is not None and moglie is not None:
-                differenze.append(abs(marito - moglie))
+                differenze[gruppo_corrente] = abs(marito - moglie)
             gruppo_corrente = persona.gruppoFamigliare
             marito = None
             moglie = None
@@ -159,28 +159,26 @@ def differenzaEtaConiugi(lista):
             marito = persona.eta
         elif persona.ruolo.strip().lower() == "moglie":
             moglie = persona.eta
-    
     if marito is not None and moglie is not None:
-        differenze.append(abs(marito - moglie))
+        differenze[gruppo_corrente] = abs(marito - moglie)
     return differenze
 
 print(differenzaEtaConiugi(my_list))
 
 def etaPrimoFiglio(lista):
-    eta_primo_figlio = []
+    eta_primo_figlio = {}
     gruppo_corrente = None
     eta_figli = []
     for persona in lista:
         if persona.gruppoFamigliare != gruppo_corrente:
-            if eta_figli:
-                eta_primo_figlio.append(max(eta_figli))
+            if eta_figli and gruppo_corrente is not None:
+                eta_primo_figlio[gruppo_corrente] = max(eta_figli)
             gruppo_corrente = persona.gruppoFamigliare
             eta_figli = []
         if persona.ruolo.strip().lower() in ["figlio", "figlia"]:
             eta_figli.append(persona.eta)
-    
-    if eta_figli:
-        eta_primo_figlio.append(max(eta_figli))
+    if eta_figli and gruppo_corrente is not None:
+        eta_primo_figlio[gruppo_corrente] = max(eta_figli)
     return eta_primo_figlio
 
 print(etaPrimoFiglio(my_list))
@@ -201,21 +199,8 @@ def etaServitu(lista):
 print(etaServitu(my_list))
 
 def persoPadri(lista):
-    tot=0
-    trenta=0
-    p=[]
-    for persona in lista:
-        if persona.eta < 30:
-            p.append(persona)
-            trenta+=1
-    for persona in p:
-        if persona.padre.strip().lower().startswith("q"):
-            tot+=1
-    ritorno=[]
-    ritorno.append(tot)
-    ritorno.append(int((tot/trenta)*100 if trenta > 0 else 0))
-    return ritorno
-    
+    return [p for p in lista if p.padre.strip().lower().startswith("q")]
+
 print(persoPadri(my_list))
             
 def numeroGruppiFamigliari(lista):
@@ -240,30 +225,6 @@ def numeroGruppiFamigliari(lista):
 
 print(numeroGruppiFamigliari(my_list))
 
-"""""""""
-def differenzaEtaTraClassi(lista):
-    differenze=[0,0,0]
-    n=0
-    p=0
-    b=0
-    for persona in lista:
-        if "signor" in persona.titolo.lower() or "signora" in persona.titolo.lower() or persona.titolo.lower() == "sig" or persona.titolo.lower() == "sig.ra":
-            differenze[0]+=persona.eta
-            n+=1
-        elif persona.titolo.lower()=="ms" or persona.titolo.lower()=="mna":
-            differenze[1]+=persona.eta
-            b+=1
-        elif persona.titolo.lower()=="nessuno":
-            differenze[2]+=persona.eta
-            p+=1
-    differenze[0]/=n if n > 0 else 0
-    differenze[1]/=b if b > 0 else 0
-    differenze[2]/=p if p > 0 else 0
-    differenze[0] = int(differenze[0])
-    differenze[1] = int(differenze[1])
-    differenze[2] = int(differenze[2])
-    return differenze
-"""""""""""
 def differenzaEtaTraClassi(lista):
     eta_nobili = []
     eta_borghesi = []
@@ -288,14 +249,22 @@ def differenzaEtaTraClassi(lista):
 print(differenzaEtaTraClassi(my_list))
 
 def suddivisioneQuartieri(lista):
-    quartieri={}
+    gruppi = {}
     for persona in lista:
-        quartiere = persona.residenza.strip().lower()
-        if quartiere in quartieri:
-            quartieri[quartiere]+=1
+        gruppi.setdefault(persona.gruppoFamigliare, []).append(persona)
+    gruppi_quartiere = []
+    for n_gruppo, membri in gruppi.items():
+        quartieri = [p.residenza.strip().lower() for p in membri]
+        if quartieri:
+            quartiere_prevalente, freq = Counter(quartieri).most_common(1)[0]
         else:
-            quartieri[quartiere]=1
-    return quartieri
+            quartiere_prevalente, freq = "", 0
+        gruppi_quartiere.append((n_gruppo, membri, quartiere_prevalente, freq))
+    gruppi_quartiere.sort(key=lambda x: (x[2], -x[3], x[0]))
+    lista_ordinata = []
+    for _, membri, _, _ in gruppi_quartiere:
+        lista_ordinata.extend(membri)
+    return lista_ordinata
 
 print(suddivisioneQuartieri(my_list))
 
@@ -322,10 +291,9 @@ def contaMaschiFemmine(lista):
         ruolo = persona.ruolo.strip().lower()
         titolo = persona.titolo.strip().lower()
         nome = persona.nome.strip().lower()
-        
-        if titolo in ["sig", "signor", "ms", "mna", "capofamiglia", "monsignore"]:
+        if titolo in ["sig", "signor", "ms", "capofamiglia", "monsignore"]:
             sesso[0] += 1
-        elif titolo in ["sig.ra", "signora", "vedova", "mater familias"]:
+        elif titolo in ["sig.ra", "signora", "vedova", "mater familias", "mna"]:
             sesso[1] += 1
         elif ruolo in ["figlio", "servo", "nipote", "garzone", "famiglio di stalla", "staffiero"]:
             sesso[0] += 1
@@ -341,30 +309,36 @@ def contaMaschiFemmine(lista):
 print(contaMaschiFemmine(my_list))
 
 def trovaMaschi(lista):
-    m=[]
+    m = []
     for persona in lista:
         ruolo = persona.ruolo.strip().lower()
         titolo = persona.titolo.strip().lower()
         nome = persona.nome.strip().lower()
-        if titolo in ["sig", "signor", "ms", "mna", "capofamiglia", "monsignore"]:
+        if titolo in ["sig", "signor", "ms", "capofamiglia", "monsignore"]:
             m.append(persona)
         elif ruolo in ["figlio", "servo", "nipote", "garzone", "famiglio di stalla", "staffiero"]:
             m.append(persona)
-        elif not nome.endswith("a"):
+        elif not nome.endswith("a") and not (
+            titolo in ["sig.ra", "signora", "vedova", "mater familias"] or
+            ruolo in ["figlia", "serva", "nipotina"]
+        ):
             m.append(persona)
     return m
 
 def trovaFemmine(lista):
-    f=[]
+    f = []
     for persona in lista:
         ruolo = persona.ruolo.strip().lower()
         titolo = persona.titolo.strip().lower()
         nome = persona.nome.strip().lower()
-        if titolo in ["sig.ra", "signora", "vedova", "mater familias"]:
+        if titolo in ["sig.ra", "signora", "vedova", "mater familias", "mna"]:
             f.append(persona)
         elif ruolo in ["figlia", "serva", "nipotina"]:
             f.append(persona)
-        elif nome.endswith("a"):
+        elif nome.endswith("a") and not (
+            titolo in ["sig", "signor", "ms", "mna", "capofamiglia", "monsignore"] or
+            ruolo in ["figlio", "servo", "nipote", "garzone", "famiglio di stalla", "staffiero"]
+        ):
             f.append(persona)
     return f
 
@@ -400,15 +374,24 @@ def quantiEtaMaschiEFemmine(lista):
 print(quantiEtaMaschiEFemmine(my_list))
 
 def strutturaFamigliare(lista):
-    gruppo=[]
-    struttura=[]
+    gruppi = {}
     for persona in lista:
-        if persona.ruolo.strip().lower() in ["capofamiglia", "mater familias", "vedova", "capofamiglia vedovo", "moglie", "marito"]:
-            if struttura:
-                gruppo.append(struttura)
-            struttura = []
-        struttura.append(persona)
-    if struttura:
-        gruppo.append(struttura)
-    return gruppo
+        gruppi.setdefault(persona.gruppoFamigliare, []).append(persona)
+    return list(gruppi.values())
+
 print(strutturaFamigliare(my_list))
+
+def info_gruppi(lista):
+    gruppi = {}
+    struttura = strutturaFamigliare(lista)
+    diff_eta = differenzaEtaConiugi(lista)
+    eta_primo = etaPrimoFiglio(lista)
+    for idx, gruppo in enumerate(struttura):
+        n_gruppo = gruppo[0].gruppoFamigliare
+        gruppi[n_gruppo] = {
+            "numero": n_gruppo,
+            "media_componenti": len(gruppo),
+            "diff_eta": diff_eta.get(n_gruppo, ""),
+            "eta_primo_figlio": eta_primo.get(n_gruppo, "")
+        }
+    return gruppi
