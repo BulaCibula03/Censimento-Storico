@@ -43,6 +43,16 @@ def api_abitanti():
     } for p in data]
     return jsonify({"abitanti": abitanti, "gruppi_info": gruppi_info})
 
+@bp.route('/api/classifiche')
+def api_classifiche():
+    nomi, cognomi = funzioni.classificaNomi(funzioni.my_list)
+    titoli = funzioni.classificaTitoli(funzioni.my_list)
+    return jsonify({
+        "nomi": nomi,
+        "cognomi": cognomi,
+        "titoli": titoli
+    })
+    
 @bp.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
@@ -72,6 +82,8 @@ def statistiche():
     f4, m4 = funzioni.quantiEtaMaschiEFemmine(funzioni.my_list)[0][3], funzioni.quantiEtaMaschiEFemmine(funzioni.my_list)[1][3]
     mediaNumeroGruppi = funzioni.mediaNumeroGruppiFamiliari(funzioni.my_list)
     contaMaschi, contaFemmine = funzioni.contaMaschiFemmine(funzioni.my_list)
+    etaMaschi = funzioni.mediaEta(funzioni.trovaMaschi(funzioni.my_list))
+    etaFemmine = funzioni.mediaEta(funzioni.trovaFemmine(funzioni.my_list))
     return render_template(
         'statistiche.html',
         etaGenerale=etaGenerale,
@@ -88,7 +100,9 @@ def statistiche():
         m1=m1, m2=m2, m3=m3, m4=m4,
         mediaNumeroGruppi=mediaNumeroGruppi,
         contaMaschi=contaMaschi,
-        contaFemmine=contaFemmine
+        contaFemmine=contaFemmine,
+        etaMaschi=etaMaschi,
+        etaFemmine=etaFemmine
     )
 
 @bp.route('/info', methods=['GET'])
