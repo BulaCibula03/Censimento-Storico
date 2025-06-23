@@ -1,175 +1,177 @@
 {% extends 'base.html' %}
     {% block content %}   
         <h1 class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 dark:text-white">Statistiche</h1>
-        <div class="relative overflow-x-auto shadow-md spazio-sezione sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
-                            Informazione
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Valore
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th colspan="2" class="px-6 py-4 text-lg font-bold text-gray-900 bg-gray-100 dark:text-white dark:bg-gray-900">
-                            Statistiche generali
-                        </th>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Numero medio componenti gruppi familiari
-                        </th>
-                        <td class="px-6 py-4">{{ mediaNumeroGruppi }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Numero totale maschi
-                        </th>
-                        <td class="px-6 py-4">{{ contaMaschi }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Numero totale femmine
-                        </th>
-                        <td class="px-6 py-4">{{ contaFemmine }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età generale
-                        </th>
-                        <td class="px-6 py-4">{{ etaGenerale }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media della servitù
-                        </th>
-                        <td class="px-6 py-4">{{ etaServitu }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media dei gruppi famigliari
-                        </th>
-                        <td class="px-6 py-4">{{ etaGruppi }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media delle mogli
-                        </th>
-                        <td class="px-6 py-4">{{ etaMogli }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media dei mariti
-                        </th>
-                        <td class="px-6 py-4">{{ etaMariti }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media dei nobili
-                        </th>
-                        <td class="px-6 py-4">{{ etaNobili }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media dei borghesi
-                        </th>
-                        <td class="px-6 py-4">{{ etaBorghesi }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media del popolo
-                        </th>
-                        <td class="px-6 py-4">{{ etaPopolo }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Quantità di persone sopra i 40 anni
-                        </th>
-                        <td class="px-6 py-4">{{ sopraQuaranta }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Quantità di persone sotto i 16 anni
-                        </th>
-                        <td class="px-6 py-4">{{ sottoSedici }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th colspan="2" class="px-6 py-4 text-lg font-bold text-gray-900 bg-gray-100 dark:text-white dark:bg-gray-900">
-                            Dati età femmine
-                        </th>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media femmine
-                        </th>
-                        <td class="px-6 py-4">{{ etaFemmine }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Nella fascia d'età inferiore ai 14 anni
-                        </th>
-                        <td class="px-6 py-4">{{ f1 }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Nella fascia d'età dai 15 anni ai 30 anni
-                        </th>
-                        <td class="px-6 py-4">{{ f2 }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Nella fascia d'età dai 31 ai 45 anni
-                        </th>
-                        <td class="px-6 py-4">{{ f3 }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Nella fascia d'età superiori ai 46 anni
-                        </th>
-                        <td class="px-6 py-4">{{ f4 }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th colspan="2" class="px-6 py-4 text-lg font-bold text-gray-900 bg-gray-100 dark:text-white dark:bg-gray-900">
-                            Dati età maschi
-                        </th>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Età media maschi
-                        </th>
-                        <td class="px-6 py-4">{{ etaMaschi }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Nella fascia d'età inferiore ai 14 anni
-                        </th>
-                        <td class="px-6 py-4">{{ m1 }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Nella fascia d'età dai 15 anni ai 30 anni
-                        </th>
-                        <td class="px-6 py-4">{{ m2 }}</td>
-                    </tr>
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Nella fascia d'età dai 31 ai 45 anni
-                        </th>
-                        <td class="px-6 py-4">{{ m3 }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                            Nella fascia d'età superiori ai 46 anni
-                        </th>
-                        <td class="px-6 py-4">{{ m4 }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <section class="p-3 bg-gray-50 dark:bg-gray-900 sm:p-5 sm:rounded-lg">
+            <div class="relative overflow-x-auto shadow-md spazio-sezione sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                Informazione
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Valore
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th colspan="2" class="px-6 py-4 text-lg font-bold text-gray-900 bg-gray-100 dark:text-white dark:bg-gray-900">
+                                Statistiche generali
+                            </th>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Numero medio componenti gruppi familiari
+                            </th>
+                            <td class="px-6 py-4">{{ mediaNumeroGruppi }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Numero totale maschi
+                            </th>
+                            <td class="px-6 py-4">{{ contaMaschi }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Numero totale femmine
+                            </th>
+                            <td class="px-6 py-4">{{ contaFemmine }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età generale
+                            </th>
+                            <td class="px-6 py-4">{{ etaGenerale }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media della servitù
+                            </th>
+                            <td class="px-6 py-4">{{ etaServitu }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media dei gruppi famigliari
+                            </th>
+                            <td class="px-6 py-4">{{ etaGruppi }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media delle mogli
+                            </th>
+                            <td class="px-6 py-4">{{ etaMogli }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media dei mariti
+                            </th>
+                            <td class="px-6 py-4">{{ etaMariti }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media dei nobili
+                            </th>
+                            <td class="px-6 py-4">{{ etaNobili }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media dei borghesi
+                            </th>
+                            <td class="px-6 py-4">{{ etaBorghesi }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media del popolo
+                            </th>
+                            <td class="px-6 py-4">{{ etaPopolo }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Quantità di persone sopra i 40 anni
+                            </th>
+                            <td class="px-6 py-4">{{ sopraQuaranta }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Quantità di persone sotto i 16 anni
+                            </th>
+                            <td class="px-6 py-4">{{ sottoSedici }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th colspan="2" class="px-6 py-4 text-lg font-bold text-gray-900 bg-gray-100 dark:text-white dark:bg-gray-900">
+                                Dati età femmine
+                            </th>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media femmine
+                            </th>
+                            <td class="px-6 py-4">{{ etaFemmine }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Nella fascia d'età inferiore ai 14 anni
+                            </th>
+                            <td class="px-6 py-4">{{ f1 }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Nella fascia d'età dai 15 anni ai 30 anni
+                            </th>
+                            <td class="px-6 py-4">{{ f2 }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Nella fascia d'età dai 31 ai 45 anni
+                            </th>
+                            <td class="px-6 py-4">{{ f3 }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Nella fascia d'età superiori ai 46 anni
+                            </th>
+                            <td class="px-6 py-4">{{ f4 }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th colspan="2" class="px-6 py-4 text-lg font-bold text-gray-900 bg-gray-100 dark:text-white dark:bg-gray-900">
+                                Dati età maschi
+                            </th>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media maschi
+                            </th>
+                            <td class="px-6 py-4">{{ etaMaschi }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Nella fascia d'età inferiore ai 14 anni
+                            </th>
+                            <td class="px-6 py-4">{{ m1 }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Nella fascia d'età dai 15 anni ai 30 anni
+                            </th>
+                            <td class="px-6 py-4">{{ m2 }}</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Nella fascia d'età dai 31 ai 45 anni
+                            </th>
+                            <td class="px-6 py-4">{{ m3 }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Nella fascia d'età superiori ai 46 anni
+                            </th>
+                            <td class="px-6 py-4">{{ m4 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
             <style>
                 .contenutoEta p{
                     margin-right:10px;
