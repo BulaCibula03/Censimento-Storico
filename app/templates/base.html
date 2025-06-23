@@ -5,81 +5,114 @@
         <title>Stato delle anime</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+        <style>
+            body {
+                min-height: 100vh;
+                position: relative;
+                background-color: hsl(var(--background, 217 32% 17%));
+                color: hsl(var(--foreground, 213 31% 91%));
+            }
+            .bg-gradient-custom {
+                position: fixed;
+                inset: 0;
+                z-index: 0;
+                pointer-events: none;
+                background: linear-gradient(135deg, rgba(30,58,138,0.2) 0%, hsl(217,32%,17%) 50%, rgba(88,28,135,0.2) 100%);
+            }
+            .gradient-text {
+                background: linear-gradient(to right, #60a5fa, #3b82f6);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            :root {
+                --background: 217 32% 17%;
+                --foreground: 213 31% 91%;
+                --card: 217 33% 15%;
+                --card-foreground: 213 31% 91%;
+                --primary: 217 91% 60%;
+                --primary-foreground: 213 31% 91%;
+                --secondary: 217 33% 20%;
+                --secondary-foreground: 213 31% 91%;
+                --muted: 217 33% 22%;
+                --muted-foreground: 215 20% 65%;
+                --border: 217 33% 25%;
+            }
+        </style>
     </head>
-    <body style="background-color: black; color: white;">
-        <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700" style="z-index:50;">
-            <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-                <button data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                    </svg>
-                </button>
-                <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-                    <ul class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                        <li>
-                            <a href="{{ url_for('main.index') }}"
-                            class="block px-3 py-2 rounded-sm md:p-0
-                            {% if request.endpoint == 'main.index' %}
-                                text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent
-                            {% else %}
-                                text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
-                            {% endif %}"
-                            aria-current="{% if request.endpoint == 'main.index' %}page{% endif %}">
-                            Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('main.info') }}"
-                            class="block px-3 py-2 rounded-sm md:p-0
-                            {% if request.endpoint == 'main.info' %}
-                                text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent
-                            {% else %}
-                                text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
-                            {% endif %}">
-                            Info Generali
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('main.statistiche') }}"
-                            class="block px-3 py-2 rounded-sm md:p-0
-                            {% if request.endpoint == 'main.statistiche' %}
-                                text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent
-                            {% else %}
-                                text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
-                            {% endif %}">
-                            Statistiche
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url_for('main.classifiche') }}"
-                            class="block px-3 py-2 rounded-sm md:p-0
-                            {% if request.endpoint == 'main.classifiche' %}
-                                text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent
-                            {% else %}
-                                text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
-                            {% endif %}">
-                            Classifiche
-                            </a>
-                        </li>
-                        <li>
+    <body style="color: white;">
+        <div class="bg-gradient-custom"></div>
+        <header class="fixed top-0 z-50 w-full bg-gray-900 border-b border-gray-700 bg-opacity-80 backdrop-blur-md">
+            <div class="container px-6 py-4 mx-auto">
+                <nav class="flex items-center justify-between">
+                    <a href="{{ url_for('main.index') }}" class="text-xl font-bold gradient-text" style="text-decoration: none;">
+                        Censimento Storico
+                    </a>
+                    <div class="items-center hidden space-x-8 md:flex">
+                        {% if request.endpoint == 'main.creator' and not dati_caricati %}
                             <a href="{{ url_for('main.creator') }}"
-                            class="block px-3 py-2 rounded-sm md:p-0
+                            class="transition-colors px-2 py-1 rounded
                             {% if request.endpoint == 'main.creator' %}
-                                text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent
+                                text-white bg-blue-700
                             {% else %}
-                                text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
+                                text-gray-300 hover:text-white
                             {% endif %}">
-                            Creators
+                                Creators
                             </a>
-                        </li>
-                    </ul>
-                </div>
+                        {% else %}
+                            <a href="{{ url_for('main.index') }}"
+                            class="transition-colors px-2 py-1 rounded
+                            {% if request.endpoint == 'main.index' %}
+                                text-white bg-blue-700
+                            {% else %}
+                                text-gray-300 hover:text-white
+                            {% endif %}">
+                                Home
+                            </a>
+                            <a href="{{ url_for('main.info') }}"
+                            class="transition-colors px-2 py-1 rounded
+                            {% if request.endpoint == 'main.info' %}
+                                text-white bg-blue-700
+                            {% else %}
+                                text-gray-300 hover:text-white
+                            {% endif %}">
+                                Info Generali
+                            </a>
+                            <a href="{{ url_for('main.statistiche') }}"
+                            class="transition-colors px-2 py-1 rounded
+                            {% if request.endpoint == 'main.statistiche' %}
+                                text-white bg-blue-700
+                            {% else %}
+                                text-gray-300 hover:text-white
+                            {% endif %}">
+                                Statistiche
+                            </a>
+                            <a href="{{ url_for('main.classifiche') }}"
+                            class="transition-colors px-2 py-1 rounded
+                            {% if request.endpoint == 'main.classifiche' %}
+                                text-white bg-blue-700
+                            {% else %}
+                                text-gray-300 hover:text-white
+                            {% endif %}">
+                                Classifiche
+                            </a>
+                            <a href="{{ url_for('main.creator') }}"
+                            class="transition-colors px-2 py-1 rounded
+                            {% if request.endpoint == 'main.creator' %}
+                                text-white bg-blue-700
+                            {% else %}
+                                text-gray-300 hover:text-white
+                            {% endif %}">
+                                Creators
+                            </a>
+                        {% endif %}
+                    </div>
+                </nav>
             </div>
-            </nav>
-            <main class="p-4">
-                {% block content %}
-                {% endblock %}
-            </main>
+        </header>
+        <main class="relative z-10 p-4 pt-20">
+            {% block content %}
+            {% endblock %}
+        </main>
     </body>
 </html>

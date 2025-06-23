@@ -17,32 +17,25 @@
 #- Quanti hanno già perso il padre? A che età?      //FATTA
 #- Suddivisione per quartieri (Contrada della Piazza, Ghirolo ecc.)     //FATTA
 from collections import Counter
-from app.parsing import parse
 from . import classi
-df = parse()
 my_list = []
 
-def creaIstanze():
+def creaIstanze(df):
     for index, row in df.iterrows():
-        if row['Ruolo'].find("capofamiglia")!=-1 or row['Ruolo'].find("mater familias")!=-1 or row['Ruolo'].find("vedova")!=-1 or row['Ruolo'].find("capofamiglia vedovo")!=-1: classi.nGruppoFamigliare+=1
-        eta_str = str(row['Eta']).replace(',', '.')
+        if row['ruolo'].find("capofamiglia")!=-1 or row['ruolo'].find("mater familias")!=-1 or row['ruolo'].find("vedova")!=-1 or row['ruolo'].find("capofamiglia vedovo")!=-1: classi.nGruppoFamigliare+=1
+        eta_str = str(row['eta']).replace(',', '.')
         try:
             eta = float(eta_str)
         except ValueError:
             eta = 0
-        p = classi.persona(str(row['Titolo']),str(row['Nome']),str(row['Cognome']),str(row['Figlio di']),eta,str(row['Ruolo']),str(row['Residenza']),classi.nGruppoFamigliare)
+        p = classi.persona(str(row['titolo']),str(row['nome']),str(row['cognome']),str(row['figlio di']),eta,str(row['ruolo']),str(row['residenza']),classi.nGruppoFamigliare)
         p.stampa()
         my_list.append(p)
     return my_list
 
-my_list = creaIstanze()
-my_list = sorted(my_list, key=lambda x: x.gruppoFamigliare)
-
 def pulisciTitoli(lista):
     for persona in lista:
         persona.titolo = persona.titolo.strip()
-        
-pulisciTitoli(my_list)
 
 #Funzione 1
 def classificaNomi(lista):
@@ -52,10 +45,6 @@ def classificaNomi(lista):
     classifica_cognomi = Counter(cognomi).most_common()
     return classifica_nomi, classifica_cognomi
 
-nomi, cognomi = classificaNomi(my_list)
-print("Classifica nomi:", nomi)
-print("Classifica cognomi:", cognomi)
-
 #Funzione 3
 def mediaEta(lista):
     tot = 0
@@ -63,15 +52,11 @@ def mediaEta(lista):
         tot += persona.eta
     return int(tot/len(lista))
 
-print(mediaEta(my_list))
-
 #Funzione 4
 def classificaTitoli(lista):
     titoli = [i.titolo for i in lista]
     classifica = Counter(titoli).most_common()
     return classifica
-
-print(classificaTitoli(my_list))
 
 #Funzione 6
 def mediaEtaGruppiFamigliari(lista):
@@ -91,8 +76,6 @@ def mediaEtaGruppiFamigliari(lista):
         medie[gruppo] = int(tot/n)
     return medie
 
-print(mediaEtaGruppiFamigliari(my_list))
-
 #Funzione 7
 def superoEtaLimite(lista):
     tot=0
@@ -101,8 +84,6 @@ def superoEtaLimite(lista):
             tot+=1
     return tot
 
-print(superoEtaLimite(my_list))
-
 #Funzione 8
 def minoriEtaMassima(lista):
     tot=0
@@ -110,8 +91,6 @@ def minoriEtaMassima(lista):
         if persona.eta < 16:
             tot+=1
     return tot
-
-print(minoriEtaMassima(my_list))
 
 #Funzione 12
 def etaMediaConiugi(lista):
@@ -138,8 +117,6 @@ def etaMediaConiugi(lista):
             nCapofamigliaVedovo += 1
     return [int(totCapofamiglia/nCapofamiglia),int(totMaterFamilias/nMaterFamilias),int(totVedova/nVedova),int(totCapofamigliaVedovo/nCapofamigliaVedovo)]
 
-print(etaMediaConiugi(my_list))
-
 def differenzaEtaConiugi(lista):
     lista = sorted(lista, key=lambda x: x.gruppoFamigliare)
     differenze = {}
@@ -163,8 +140,6 @@ def differenzaEtaConiugi(lista):
         differenze[gruppo_corrente] = abs(marito - moglie)
     return differenze
 
-print(differenzaEtaConiugi(my_list))
-
 def etaPrimoFiglio(lista):
     eta_primo_figlio = {}
     gruppo_corrente = None
@@ -180,8 +155,6 @@ def etaPrimoFiglio(lista):
     if eta_figli and gruppo_corrente is not None:
         eta_primo_figlio[gruppo_corrente] = max(eta_figli)
     return eta_primo_figlio
-
-print(etaPrimoFiglio(my_list))
           
 def etaServitu(lista):
     eta_servitu = 0
@@ -196,12 +169,8 @@ def etaServitu(lista):
             totServi += 1
     return int(eta_servitu / totServi) if totServi > 0 else 0
 
-print(etaServitu(my_list))
-
 def persoPadri(lista):
     return [p for p in lista if p.padre.strip().lower().startswith("q")]
-
-print(persoPadri(my_list))
             
 def numeroGruppiFamigliari(lista):
     media=[]
@@ -222,8 +191,6 @@ def numeroGruppiFamigliari(lista):
     media[i]/=n
     media[i]=int(media[i])
     return media
-
-print(numeroGruppiFamigliari(my_list))
 
 def differenzaEtaTraClassi(lista):
     eta_nobili = []
@@ -246,8 +213,6 @@ def differenzaEtaTraClassi(lista):
     media_popolo = int(sum(eta_popolo)/len(eta_popolo)) if eta_popolo else 0
     return [media_nobili, media_borghesi, media_popolo]
 
-print(differenzaEtaTraClassi(my_list))
-
 def suddivisioneQuartieri(lista):
     gruppi = {}
     for persona in lista:
@@ -266,8 +231,6 @@ def suddivisioneQuartieri(lista):
         lista_ordinata.extend(membri)
     return lista_ordinata
 
-print(suddivisioneQuartieri(my_list))
-
 def mediaNumeroGruppiFamiliari(lista):
     gruppi = []
     i=0
@@ -282,8 +245,6 @@ def mediaNumeroGruppiFamiliari(lista):
             i+=1
     tot += gruppi[i] 
     return int(tot/(i+1))
-
-print(mediaNumeroGruppiFamiliari(my_list))
 
 def contaMaschiFemmine(lista):
     sesso=[0,0]
@@ -305,8 +266,6 @@ def contaMaschiFemmine(lista):
             sesso[0] += 1
 
     return sesso
-
-print(contaMaschiFemmine(my_list))
 
 def trovaMaschi(lista):
     m = []
@@ -371,15 +330,11 @@ def quantiEtaMaschiEFemmine(lista):
 
     return fascioEtaFemminile,fascioEtaMaschile
 
-print(quantiEtaMaschiEFemmine(my_list))
-
 def strutturaFamigliare(lista):
     gruppi = {}
     for persona in lista:
         gruppi.setdefault(persona.gruppoFamigliare, []).append(persona)
     return list(gruppi.values())
-
-print(strutturaFamigliare(my_list))
 
 def info_gruppi(lista):
     gruppi = {}

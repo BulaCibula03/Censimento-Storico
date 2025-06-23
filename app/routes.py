@@ -1,7 +1,45 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from . import funzioni
-from collections import Counter
+import os
+import pandas as pd
+
 bp = Blueprint('main', __name__)
+
+EXPECTED_COLUMNS = [
+    "Titolo", "Nome", "Cognome", "Figlio di", "Eta", "Ruolo", "Residenza"
+]
+
+UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+@bp.route('/upload', methods=['POST'])
+def upload():
+    file = request.files.get('file')
+    if file and file.filename.endswith('.csv'):
+        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(filepath)
+        try:
+            df = pd.read_csv(filepath, encoding='utf-8-sig')
+        except Exception:
+            flash('Errore nella lettura del file CSV.', 'danger')
+            return redirect(url_for('main.index'))
+
+        df.columns = [c.strip().lower() for c in df.columns]
+        expected_columns = [c.strip().lower() for c in EXPECTED_COLUMNS]
+
+        if not set(expected_columns) <= set(df.columns):
+            flash('Il file CSV non ha il formato corretto. Le colonne devono essere: ' + ', '.join(EXPECTED_COLUMNS), 'danger')
+            return redirect(url_for('main.index'))
+
+        df = df[expected_columns]
+        funzioni.my_list = funzioni.creaIstanze(df)
+        funzioni.my_list = sorted(funzioni.my_list, key=lambda x: x.gruppoFamigliare)
+        funzioni.pulisciTitoli(funzioni.my_list)
+        #flash('File caricato e analizzato con successo!', 'success')
+        return redirect(url_for('main.info'))
+    else:
+        flash('Carica un file CSV valido.', 'danger')
+    return redirect(url_for('main.index'))
 
 @bp.route('/api/abitanti')
 def api_abitanti():
@@ -55,11 +93,11 @@ def api_classifiche():
     
 @bp.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html', dati_caricati = bool(funzioni.my_list))
 
 @bp.route('/creator', methods=['GET'])
 def creator():
-    return render_template('creator.html')
+    return render_template('creator.html', dati_caricati = bool(funzioni.my_list))
 
 @bp.route('/statistiche', methods=['GET'])
 def statistiche():
@@ -86,6 +124,7 @@ def statistiche():
     etaFemmine = funzioni.mediaEta(funzioni.trovaFemmine(funzioni.my_list))
     return render_template(
         'statistiche.html',
+        dati_caricati = bool(funzioni.my_list),
         etaGenerale=etaGenerale,
         etaServitu=etaServitu,
         etaGruppi=etaGruppi,
@@ -107,8 +146,11 @@ def statistiche():
 
 @bp.route('/info', methods=['GET'])
 def info():
-    return render_template('infoGenerali.html')
+    if not funzioni.my_list:
+        flash('Devi prima caricare un file CSV!', 'danger')
+        return redirect(url_for('main.index'))
+    return render_template('infoGenerali.html', dati_caricati = bool(funzioni.my_list))
 
 @bp.route('/classifiche', methods=['GET'])
 def classifiche():
-    return render_template('classifiche.html')
+    return render_template('classifiche.html', dati_caricati = bool(funzioni.my_list))
