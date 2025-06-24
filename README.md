@@ -74,4 +74,4 @@ Questo progetto è rilasciato sotto licenza MIT.
 
 ---
 
-**Autori**: [BulaCibula03](https://github.com/BulaCibula03)
+**Autori**: [BulaCibula03](https://github.com/BulaCibula03) e [Tokyo222307](https://github.com/Tokyo222307)
