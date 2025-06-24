@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Censimento Storico - Esplora i Dati Storici</title>
+    <meta name="description" content="Piattaforma per esplorare e analizzare i dati dei censimenti storici, preservando la memoria genealogica e demografica del passato.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<body>
+    <div>
+        <h1 class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 dark:text-white">Un Archivio di Anime, Un Patrimonio di Memoria</h1>
+        <p class="text-gray-800 dark:text-white text-center text-3xl">Consulta gli "Stati delle Anime" digitalizzati per ricostruire le radici della tua comunità.</p>
+        <h2 class="mb-6 text-2xl font-extrabold tracking-tight text-center text-gray-900 dark:text-white">Cosa è uno stato delle anime?</h2>
+        <p class="text-gray-800 dark:text-white text-center text-3xl" name="info">Gli stati delle anime sono dei registi parocchiali che venivano usati in particolare tra il XVII e il XIX secolo e venivano usati per tenere traccia delle persone appartenenti alla comunità religiosa</p>
+        <h2 class="mb-6 text-2xl font-extrabold tracking-tight text-center text-gray-900 dark:text-white">Perché sono importanti questi registri?</h2>
+        <p class="text-gray-800 dark:text-white text-center text-3xl" name="info">A livello storico questi registri oggi sono una fonte preziosa per la storia locale perché:</p>
+        <ul class="flex space-x-4 sm:mt-0">
+            <li class="text-gray-500 hover:text-gray-900 dark:hover:text-white">Viene documentato come erano organizati i nuclei famigliari, le parentele e le convivenze</li>
+            <li class="text-gray-500 hover:text-gray-900 dark:hover:text-white" >Mostano la composizione sociale di un paese: dal lavoro(artigiani,contandini) alla classe(nobili,popolo)</li>
+            <li class="text-gray-500 hover:text-gray-900 dark:hover:text-white">Vengono segnati anche eventi significati nella loro vita come la nascita,il matrimonio o la morte</li>
+        </ul>
+        <p class="text-gray-800 dark:text-white text-center text-3xl" name="info">Questi registri poiché contengono nomi,cognomi,rapporti famigliari, aiutano anche a livello genealogico:</p>
+        <ul class="flex space-x-4 sm:mt-0">
+            <li class="text-gray-500 hover:text-gray-900 dark:hover:text-white" name="genealogico">Permettendo di creare gli alberi genealogici anche prima dell'introduzione dei registri civili, introdotti nei anni del '800</li>
+            <li class="text-gray-500 hover:text-gray-900 dark:hover:text-white" name="genealogico">Quindi si riesce a seguire le famiglie durante il tempo, generazione dopo generazione</li>
+        </ul>
+        <h2 class="mb-6 text-2xl font-extrabold tracking-tight text-center text-gray-900 dark:text-white">Cosa fa questo sito?</h2>
+        <p class="text-gray-800 dark:text-white text-center text-3xl" name="info">Ti permette di trovare informazioni sui tuoi antenati e sulla storia della tua comunità attraverso gli archivi parrocchiali</p>
+    </div>
+    <style>
+        h1,h2{
+            margin-top: 50px;
+            margin-bottom: 50px;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        p{
+            margin-top: 50px;
+            margin-bottom: 50px;
+            margin-left: 50px;
+            margin-right: 50px;
+            text-align: center;
+        }
+        p[name="info"]{
+            margin-top: 50px;
+            margin-bottom: 50px;
+            margin-left: 70px;
+            margin-right: 70px;
+            text-align: center;
+        }
+        li[name="genealogico"]{
+            margin-top: 50px;
+            margin-bottom: 50px;
+            margin-left: 60px;
+            margin-right: 60px;
+            text-align: justify;
+        }
+    </style>    
+</body>
+</html>
