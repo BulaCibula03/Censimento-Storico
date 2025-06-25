@@ -20,10 +20,11 @@
     <header>
         <div>
             <nav class="flex items-center justify-between">
-                <button name="navbar" onclick="window.location.href='{{ url_for(main.info) }}'">Stato delle anime</button>
-                <button name="navbar" onclick="window.location.href='{{ url_for(main.statistiche) }}'">Informazioni X età</button>
-                <button name="navbar" onclick="window.location.href='{{ url_for(main.classifiche) }}'">Informazioni su gruppi famigliari</button>
-                <button name="navbar" onclick="window.location.href='{{ url_for(main.creator) }}'">contats</button>
+                <a name="navbar" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" href="{{ url_for('main.info') }}">Stato delle anime</a>
+                <a name="navbar" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" href="{{ url_for('main.statistiche') }}">Informazioni X età</a>
+                <img>
+                <a name="navbar" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" href="{{ url_for('main.classifiche') }}">Informazioni su gruppi famigliari</a>
+                <a name="navbar" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" href="{{ url_for('main.creator') }}">Creator</a>
             </nav>
         </div>
     </header>
@@ -46,6 +47,12 @@
         </ul>
         <h2 class="mb-6 text-2xl font-extrabold tracking-tight text-center text-gray-900 dark:text-white">Cosa fa questo sito?</h2>
         <p class="text-3xl text-center text-gray-800 dark:text-white" name="info">Ti permette di trovare informazioni sui tuoi antenati e sulla storia della tua comunità attraverso gli archivi parrocchiali</p>
+        <h2 class="mb-6 text-2xl font-extrabold tracking-tight text-center text-gray-900 dark:text-white">Cosa può offrire il nostro sito per aiutarti?</h2>
+        <ul class="flex space-x-4 sm:mt-0">
+            <li class="text-gray-500 hover:text-gray-900 dark:hover:text-white">Informazioni sui nomi,cognomi,eta,se il padre era morto o no,il ruolo nel nucleo famigliare di appartenenza o il lavoro,il loro titolo e dove vivevano:<a name="service" href="{{ url_for('main.info') }}">Stato delle anime</a></li>
+            <li class="text-gray-500 hover:text-gray-900 dark:hover:text-white" >Informazioni basate sull'età:<a name="service" href="{{ url_for('main.statistiche') }}">Informazioni X età</a></li>
+            <li class="text-gray-500 hover:text-gray-900 dark:hover:text-white">Informazioni sui gruppi famigliari:<a name="service" href="{{ url_for('main.classifiche') }}">Informazioni su gruppi famigliari</a></li>
+        </ul>
     </div>
     <style>
         h1,h2{
@@ -75,9 +82,13 @@
             margin-right: 60px;
             text-align: justify;
         }
-        button[name="navbar"]{
+        a[name="navbar"]{
             font: bold;
             color: white;
+        }
+        a[name="service"]{
+            font: bold;
+            color: rgb(85, 123, 210);
         }
     </style>    
 </body>
