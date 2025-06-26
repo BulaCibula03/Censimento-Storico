@@ -23,21 +23,25 @@
             <button class="nascondi-btn" onclick="toggleIndice()">nascondi</button>
         </h2>
         <div class="indice-content" id="indiceContent">
-            <strong>Censimento Storico</strong>
-            <a href="#">Guida Sito</a>
+            <strong>Censimento Storico - Guida di utilizzo</strong>
             <a href="{{ url_for('main.index') }}">Home</a>
+            <a href="#">Informazioni generali</a>
+            <a href="#Funzionamento">Funzionamento</a>
+            <a href="#Service">Servizi</a>
         </div>
         </aside>
         <main>
             <h1>INFORMAZIONI GENERALI SUL SITO</h1>
-            <h2>Come funziona il sito?</h2>
+            <p>Il sito offre una piattaforma per esplorare e analizzare i dati storici dei censimenti, preservando la memoria genealogica e demografica del passato, nello stesso tempo aiuta le persone ad avere inforamzioni sul loro passato e scoprire le loro origini e parentele</p>
+            <h2 id="Funzionamento">Come funziona il sito?</h2>
             <p>il sito funziona che devi caricare un file csv con il formato:</p><p name="formato">Titolo,Nome,Cognome,Figlio di,Eta,Ruolo,Residenza,</p>
-            <h2>Cosa può offrire il nostro sito per aiutarti?</h2>
+            <p name="formato">Per Esempio: Signore,Lorenzo,de' Medici,Piero,45,Capofamiglia,Via Roma,</p>
+            <h2 id="Service">Cosa può offrire il nostro sito per aiutarti?</h2>
             <ul>
-                <li>Ricerca Avanzata: Filtra e cerca attraverso i dati storici con potenti strumenti di ricerca</li>
-                <li>Statistiche Dettagliate: Visualizza analisi approfondite e statistiche demografiche storiche</li>
-                <li>Gruppi Famigliai: Esplora le famiglie storiche e le relazioni genealogiche</li>
-                <li>Titoli Nobiliari: Analizza la distribuzione dei titoli nobiliari nei censimenti</li>
+                <li><b>Ricerca Avanzata</b>: Filtra e cerca attraverso i dati storici con potenti strumenti di ricerca</li>
+                <li><b>Statistiche Dettagliate</b>: Visualizza analisi approfondite e statistiche demografiche storiche</li>
+                <li><b>Gruppi Famigliai</b>: Esplora le famiglie storiche e le relazioni genealogiche</li>
+                <li><b>Titoli Nobiliari</b>: Analizza la distribuzione dei titoli nobiliari nei censimenti</li>
             </ul>
         </main>
     </div>
@@ -64,7 +68,6 @@
         color: white;
     }
     main {
-        flex: 1;
         padding: 30px;
         color: white;
     }
@@ -96,10 +99,16 @@
         margin-bottom:15px;
     }
     .indice {
-        width: 250px;
-        padding: 10px;
-        border-radius: 6px;
-        color: white;
+        position:fixed;
+        top:0;
+        left:0;
+        width:250px;
+        height:100vh;
+        overflow-y:auto;
+        padding:20px;
+        color:white;
+        border-right: 1px solid #444;
+        z-index:1000;
     }
     .indice h2 {
         font-size: 16px;
@@ -121,10 +130,13 @@
         cursor: pointer;
     }
     .contenuto-flex {
-        flex: 1;
-        display: flex;
-        gap: 30px;
+        display:flex;
+        margin-left:250px;
+        flex-direction:column;
         padding: 20px;
+    }
+    b{
+        color:purple;
     }
 </style>
 <script>
