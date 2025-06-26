@@ -1,367 +1,366 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Censimento Storico - Esplora i Dati Storici</title>
-    <meta name="description" content="Piattaforma per esplorare e analizzare i dati dei censimenti storici, preservando la memoria genealogica e demografica del passato.">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            --background: 217 32% 17%;
-            --foreground: 213 31% 91%;
-            --card: 217 33% 15%;
-            --card-foreground: 213 31% 91%;
-            --primary: 217 91% 60%;
-            --primary-foreground: 213 31% 91%;
-            --secondary: 217 33% 20%;
-            --secondary-foreground: 213 31% 91%;
-            --muted: 217 33% 22%;
-            --muted-foreground: 215 20% 65%;
-            --border: 217 33% 25%;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Censimento Storico - Esplora i Dati Storici</title>
+        <meta name="description" content="Piattaforma per esplorare e analizzare i dati dei censimenti storici, preservando la memoria genealogica e demografica del passato.">
         
-        body {
-            background-color: hsl(var(--background));
-            color: hsl(var(--foreground));
-        }
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
         
-        .gradient-text {
-            background: linear-gradient(to right, #60a5fa, #3b82f6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        <!-- Lucide Icons -->
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
         
-        .glass-card {
-            background-color: hsl(var(--card) / 0.5);
-            backdrop-filter: blur(8px);
-            border: 1px solid hsl(var(--border) / 0.5);
-        }
-        
-        .bg-background { background-color: hsl(var(--background)); }
-        .bg-card { background-color: hsl(var(--card)); }
-        .bg-primary { background-color: hsl(var(--primary)); }
-        .bg-secondary { background-color: hsl(var(--secondary)); }
-        .bg-muted { background-color: hsl(var(--muted)); }
-        
-        .text-foreground { color: hsl(var(--foreground)); }
-        .text-primary { color: hsl(var(--primary)); }
-        .text-muted-foreground { color: hsl(var(--muted-foreground)); }
-        
-        .border-border { border-color: hsl(var(--border)); }
-        .border-primary { border-color: hsl(var(--primary)); }
-        
-        .hover\:bg-primary:hover { background-color: hsl(var(--primary)); }
-        .hover\:text-foreground:hover { color: hsl(var(--foreground)); }
-        .hover\:scale-105:hover { transform: scale(1.05); }
-        .fade-out {
-            opacity: 0;
-            transition: opacity 0.7s ease;
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-background">
-    <!-- Header -->
-        <header class="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md border-border">
-            <div class="container px-6 py-4 mx-auto">
-                <nav class="flex items-center justify-between">
-                    <div class="text-xl font-bold gradient-text">
-                        Censimento Storico
-                    </div>
-                    <div class="items-center hidden space-x-8 md:flex">
-                        <a href="{{ url_for('main.creator') }}" class="transition-colors text-foreground/80 hover:text-foreground">
-                            Creators
-                        </a>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div id="flash-messages" class="fixed z-50 w-full max-w-md -translate-x-1/2 top-24 left-1/2">
-            {% for category, message in messages %}
-                <div class="px-4 py-3 mb-2 text-white bg-red-600 rounded shadow">
-                {{ message }}
+        <!-- Custom CSS -->
+        <style>
+            :root {
+                --background: 217 32% 17%;
+                --foreground: 213 31% 91%;
+                --card: 217 33% 15%;
+                --card-foreground: 213 31% 91%;
+                --primary: 217 91% 60%;
+                --primary-foreground: 213 31% 91%;
+                --secondary: 217 33% 20%;
+                --secondary-foreground: 213 31% 91%;
+                --muted: 217 33% 22%;
+                --muted-foreground: 215 20% 65%;
+                --border: 217 33% 25%;
+            }
+            
+            body {
+                background-color: hsl(var(--background));
+                color: hsl(var(--foreground));
+            }
+            
+            .gradient-text {
+                background: linear-gradient(to right, #60a5fa, #3b82f6);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            
+            .glass-card {
+                background-color: hsl(var(--card) / 0.5);
+                backdrop-filter: blur(8px);
+                border: 1px solid hsl(var(--border) / 0.5);
+            }
+            
+            .bg-background { background-color: hsl(var(--background)); }
+            .bg-card { background-color: hsl(var(--card)); }
+            .bg-primary { background-color: hsl(var(--primary)); }
+            .bg-secondary { background-color: hsl(var(--secondary)); }
+            .bg-muted { background-color: hsl(var(--muted)); }
+            
+            .text-foreground { color: hsl(var(--foreground)); }
+            .text-primary { color: hsl(var(--primary)); }
+            .text-muted-foreground { color: hsl(var(--muted-foreground)); }
+            
+            .border-border { border-color: hsl(var(--border)); }
+            .border-primary { border-color: hsl(var(--primary)); }
+            
+            .hover\:bg-primary:hover { background-color: hsl(var(--primary)); }
+            .hover\:text-foreground:hover { color: hsl(var(--foreground)); }
+            .hover\:scale-105:hover { transform: scale(1.05); }
+            .fade-out {
+                opacity: 0;
+                transition: opacity 0.7s ease;
+            }
+        </style>
+    </head>
+    <body class="min-h-screen bg-background">
+        <!-- Header -->
+            <header class="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md border-border">
+                <div class="container px-6 py-4 mx-auto">
+                    <nav class="flex items-center justify-between">
+                        <div class="text-xl font-bold gradient-text">
+                            Censimento Storico
+                        </div>
+                        <div class="items-center hidden space-x-8 md:flex">
+                            <a href="{{ url_for('main.creator') }}" class="transition-colors text-foreground/80 hover:text-foreground">
+                                Creators
+                            </a>
+                        </div>
+                    </nav>
                 </div>
-            {% endfor %}
-            </div>
-            <script>
-                setTimeout(function() {
-                    var flash = document.getElementById('flash-messages');
-                    if(flash) {
-                        flash.classList.add('fade-out');
-                        setTimeout(function() {
-                            flash.style.display = 'none';
-                        }, 700);
-                    }
-                }, 3500);
-            </script>
-        {% endif %}
-        {% endwith %}
+            </header>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-messages" class="fixed z-50 w-full max-w-md -translate-x-1/2 top-24 left-1/2">
+                {% for category, message in messages %}
+                    <div class="px-4 py-3 mb-2 text-white bg-red-600 rounded shadow">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+                <script>
+                    setTimeout(function() {
+                        var flash = document.getElementById('flash-messages');
+                        if(flash) {
+                            flash.classList.add('fade-out');
+                            setTimeout(function() {
+                                flash.style.display = 'none';
+                            }, 700);
+                        }
+                    }, 3500);
+                </script>
+            {% endif %}
+            {% endwith %}
 
-    <!-- Hero Section -->
-    <section id="home" class="relative flex items-center justify-center min-h-screen overflow-hidden">
-        <!-- Background gradient -->
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-background to-purple-900/20"></div>
-        
-        <div class="container relative z-10 px-6 py-20 mx-auto">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="mb-6 text-5xl font-bold leading-tight md:text-7xl">
-                    Censimenti
-                    <span class="block mt-2 gradient-text">
-                        Storici
-                    </span>
-                </h1>
-                
-                <p class="max-w-2xl mx-auto mb-8 text-xl leading-relaxed md:text-2xl text-muted-foreground">
-                    Esplora i dati storici dei censimenti antichi. Visualizza nomi, cognomi, 
-                    titoli nobiliari, statistiche demografiche e strutture famigliari del passato.
-                </p>
-                
-                <div class="flex flex-col justify-center gap-4 mb-16 sm:flex-row">
-                    <button type="button"
-                        onclick="window.location.href='{{ url_for('main.info') }}'"
-                        class="flex items-center justify-center gap-2 px-8 py-4 text-lg rounded-md bg-primary hover:bg-primary/90 text-background"
-                        {% if not dati_caricati %}disabled style="opacity:0.5;cursor:not-allowed"{% endif %}>
-                        Esplora Dati
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </button>
-                    <form id="upload-form" method="post" enctype="multipart/form-data" action="{{ url_for('main.upload') }}">
-                        <input id="file-input" type="file" name="file" accept=".csv" class="hidden" required>
+        <!-- Hero Section -->
+        <section id="home" class="relative flex items-center justify-center min-h-screen overflow-hidden">
+            <!-- Background gradient -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-background to-purple-900/20"></div>
+            
+            <div class="container relative z-10 px-6 py-20 mx-auto">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="mb-6 text-5xl font-bold leading-tight md:text-7xl">
+                        Censimenti
+                        <span class="block mt-2 gradient-text">
+                            Storici
+                        </span>
+                    </h1>
+                    
+                    <p class="max-w-2xl mx-auto mb-8 text-xl leading-relaxed md:text-2xl text-muted-foreground">
+                        Esplora i dati storici dei censimenti antichi. Visualizza nomi, cognomi, 
+                        titoli nobiliari, statistiche demografiche e strutture famigliari del passato.
+                    </p>
+                    
+                    <div class="flex flex-col justify-center gap-4 mb-16 sm:flex-row">
                         <button type="button"
-                            class="px-8 py-4 text-lg border rounded-md border-primary text-primary hover:bg-primary hover:text-background"
-                            onclick="document.getElementById('file-input').click();">
-                            Carica Censimento
+                            onclick="window.location.href='{{ url_for('main.info') }}'"
+                            class="flex items-center justify-center gap-2 px-8 py-4 text-lg rounded-md bg-primary hover:bg-primary/90 text-background"
+                            {% if not dati_caricati %}disabled style="opacity:0.5;cursor:not-allowed"{% endif %}>
+                            Esplora Dati
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         </button>
-                    </form>
-                    <script>
-                        document.getElementById('file-input').addEventListener('change', function() {
-                            if(this.files.length > 0) {
-                                document.getElementById('upload-form').submit();
-                            }
+                        <form id="upload-form" method="post" enctype="multipart/form-data" action="{{ url_for('main.upload') }}">
+                            <input id="file-input" type="file" name="file" accept=".csv" class="hidden" required>
+                            <button type="button"
+                                class="px-8 py-4 text-lg border rounded-md border-primary text-primary hover:bg-primary hover:text-background"
+                                onclick="document.getElementById('file-input').click();">
+                                Carica Censimento
+                            </button>
+                        </form>
+                        <script>
+                            document.getElementById('file-input').addEventListener('change', function() {
+                                if(this.files.length > 0) {
+                                    document.getElementById('upload-form').submit();
+                                }
+                            });
+                        </script>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="grid max-w-3xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
+                        <div class="p-6 text-center glass-card rounded-xl">
+                            <i data-lucide="crown" class="w-8 h-8 mx-auto mb-3 text-primary"></i>
+                            <div class="text-2xl font-bold text-foreground">&infin;</div>
+                            <div class="text-muted-foreground">Persone<br><span class="text-xs">(carica il tuo file!)</span></div>
+                        </div>
+                        <div class="p-6 text-center glass-card rounded-xl">
+                            <i data-lucide="users" class="w-8 h-8 mx-auto mb-3 text-primary"></i>
+                            <div class="text-2xl font-bold text-foreground">&infin;</div>
+                            <div class="text-muted-foreground">Famiglie Censite<br><span class="text-xs">(carica il tuo file!)</span></div>
+                        </div>
+                        <div class="p-6 text-center glass-card rounded-xl">
+                            <i data-lucide="infinity" class="w-8 h-8 mx-auto mb-3 text-primary"></i>
+                            <div class="text-2xl font-bold text-foreground">&infin;</div>
+                            <div class="text-muted-foreground">Censimenti Storici<br><span class="text-xs">(carica il tuo file!)</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="relative py-20">
+            <div class="container px-6 mx-auto">
+                <div class="mb-16 text-center">
+                    <h2 class="mb-6 text-4xl font-bold md:text-5xl">
+                        Funzionalità
+                        <span class="gradient-text"> Potenti</span>
+                    </h2>
+                    <p class="max-w-2xl mx-auto text-xl text-muted-foreground">
+                        Tutto quello che ti serve per esplorare i dati storici
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    <div class="p-6 transition-all duration-300 glass-card hover:bg-card/70 hover:scale-105 rounded-xl">
+                        <i data-lucide="search" class="w-12 h-12 mb-4 text-primary"></i>
+                        <h3 class="mb-3 text-xl font-semibold text-foreground">
+                            Ricerca Avanzata
+                        </h3>
+                        <p class="leading-relaxed text-muted-foreground">
+                            Filtra e cerca attraverso i dati storici con potenti strumenti di ricerca
+                        </p>
+                    </div>
+                    
+                    <div class="p-6 transition-all duration-300 glass-card hover:bg-card/70 hover:scale-105 rounded-xl">
+                        <i data-lucide="bar-chart-3" class="w-12 h-12 mb-4 text-primary"></i>
+                        <h3 class="mb-3 text-xl font-semibold text-foreground">
+                            Statistiche Dettagliate
+                        </h3>
+                        <p class="leading-relaxed text-muted-foreground">
+                            Visualizza analisi approfondite e statistiche demografiche storiche
+                        </p>
+                    </div>
+                    
+                    <div class="p-6 transition-all duration-300 glass-card hover:bg-card/70 hover:scale-105 rounded-xl">
+                        <i data-lucide="users" class="w-12 h-12 mb-4 text-primary"></i>
+                        <h3 class="mb-3 text-xl font-semibold text-foreground">
+                            Gruppi Famigliari
+                        </h3>
+                        <p class="leading-relaxed text-muted-foreground">
+                            Esplora le strutture famigliari e le relazioni genealogiche
+                        </p>
+                    </div>
+                    
+                    <div class="p-6 transition-all duration-300 glass-card hover:bg-card/70 hover:scale-105 rounded-xl">
+                        <i data-lucide="crown" class="w-12 h-12 mb-4 text-primary"></i>
+                        <h3 class="mb-3 text-xl font-semibold text-foreground">
+                            Titoli Nobiliari
+                        </h3>
+                        <p class="leading-relaxed text-muted-foreground">
+                            Analizza la distribuzione dei titoli nobiliari nei censimenti
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preview Section -->
+        <section class="relative py-20">
+            <div class="container px-6 mx-auto">
+                <div class="mb-16 text-center">
+                    <h2 class="mb-6 text-4xl font-bold md:text-5xl">
+                        Esempio di
+                        <span class="gradient-text"> Censimento</span>
+                    </h2>
+                    <p class="max-w-2xl mx-auto text-xl text-muted-foreground">
+                        Ecco come appaiono i dati storici nell'interfaccia
+                    </p>
+                </div>
+                
+                <!-- Esempio di Censimento -->
+                <div class="max-w-5xl mx-auto">
+                    <div class="p-8 glass-card rounded-xl">
+                        <div class="mb-6">
+                            <h3 class="mb-2 text-2xl font-bold text-center">Censimento di Crema 1592-93</h3>
+                            <p class="text-center text-muted-foreground">Nomi, Cognomi, Titoli e altri dati</p>
+                        </div>
+                        <div class="overflow-x-auto sm:rounded-lg">
+                            <table class="w-full text-sm text-left text-gray-500 border rounded-lg dark:text-gray-400 border-border bg-white/80 dark:bg-gray-800/80">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">Gruppo Famigliare</th>
+                                        <th scope="col" class="px-6 py-3">Nome</th>
+                                        <th scope="col" class="px-6 py-3">Cognome</th>
+                                        <th scope="col" class="px-6 py-3">Titolo</th>
+                                        <th scope="col" class="px-6 py-3">Età</th>
+                                        <th scope="col" class="px-6 py-3">Padre</th>
+                                        <th scope="col" class="px-6 py-3">Ruolo</th>
+                                        <th scope="col" class="px-6 py-3">Residenza</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-200 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">1</th>
+                                        <td class="px-6 py-4">Lorenzo</td>
+                                        <td class="px-6 py-4">de' Medici</td>
+                                        <td class="px-6 py-4">Signore</td>
+                                        <td class="px-6 py-4">45</td>
+                                        <td class="px-6 py-4">Piero</td>
+                                        <td class="px-6 py-4">Capofamiglia</td>
+                                        <td class="px-6 py-4">Via Roma</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">1</th>
+                                        <td class="px-6 py-4">Lucrezia</td>
+                                        <td class="px-6 py-4">de' Medici</td>
+                                        <td class="px-6 py-4">Nobile</td>
+                                        <td class="px-6 py-4">42</td>
+                                        <td class="px-6 py-4">Bartolomeo</td>
+                                        <td class="px-6 py-4">Moglie</td>
+                                        <td class="px-6 py-4">Via Roma</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">2</th>
+                                        <td class="px-6 py-4">Francesco</td>
+                                        <td class="px-6 py-4">Pazzi</td>
+                                        <td class="px-6 py-4">Mercante</td>
+                                        <td class="px-6 py-4">38</td>
+                                        <td class="px-6 py-4">Giovanni</td>
+                                        <td class="px-6 py-4">Capofamiglia</td>
+                                        <td class="px-6 py-4">Via Ghibellina</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 border-t border-border bg-card/20">
+            <div class="container px-6 mx-auto">
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+                    <div class="col-span-1 md:col-span-2">
+                        <div class="mb-4 text-2xl font-bold gradient-text">
+                            Censimento Storico
+                        </div>
+                        <p class="max-w-md mb-4 text-muted-foreground">
+                            La piattaforma per esplorare e analizzare i dati dei censimenti storici, 
+                            preservando la memoria genealogica e demografica del passato.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="mb-4 font-semibold text-foreground">Esplora</h4>
+                        <ul class="space-y-2 text-muted-foreground">
+                            <li><a href="{{ url_for('main.info') }}" class="transition-colors hover:text-foreground">Info Generali</a></li>
+                            <li><a href="{{ url_for('main.statistiche') }}" class="transition-colors hover:text-foreground">Statistiche</a></li>
+                            <li><a href="{{ url_for('main.classifiche') }}" class="transition-colors hover:text-foreground">Classifiche</a></li>
+                            <li><a href="{{ url_for('main.creator') }}" class="transition-colors hover:text-foreground">Creators</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="mb-4 font-semibold text-foreground">Supporto</h4>
+                        <ul class="space-y-2 text-muted-foreground">
+                            <li><a href="{{ url_for('main.creator') }}" class="transition-colors hover:text-foreground">Contatti</a></li>
+                            <li><a href="{{ url_for('main.wiki') }}" class="transition-colors hover:text-foreground">Guida</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="pt-8 mt-8 text-center border-t border-border text-muted-foreground">
+                    <p>&copy; 2024 Censimento Storico. Tutti i diritti riservati.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Initialize Lucide Icons -->
+        <script>
+            lucide.createIcons();
+        </script>
+        
+        <!-- Smooth scrolling -->
+        <script>
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
                         });
-                    </script>
-                </div>
-                
-                <!-- Stats -->
-                <div class="grid max-w-3xl grid-cols-1 gap-8 mx-auto md:grid-cols-3">
-                    <div class="p-6 text-center glass-card rounded-xl">
-                        <i data-lucide="crown" class="w-8 h-8 mx-auto mb-3 text-primary"></i>
-                        <div class="text-2xl font-bold text-foreground">&infin;</div>
-                        <div class="text-muted-foreground">Persone<br><span class="text-xs">(carica il tuo file!)</span></div>
-                    </div>
-                    <div class="p-6 text-center glass-card rounded-xl">
-                        <i data-lucide="users" class="w-8 h-8 mx-auto mb-3 text-primary"></i>
-                        <div class="text-2xl font-bold text-foreground">&infin;</div>
-                        <div class="text-muted-foreground">Famiglie Censite<br><span class="text-xs">(carica il tuo file!)</span></div>
-                    </div>
-                    <div class="p-6 text-center glass-card rounded-xl">
-                        <i data-lucide="infinity" class="w-8 h-8 mx-auto mb-3 text-primary"></i>
-                        <div class="text-2xl font-bold text-foreground">&infin;</div>
-                        <div class="text-muted-foreground">Censimenti Storici<br><span class="text-xs">(carica il tuo file!)</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="relative py-20">
-        <div class="container px-6 mx-auto">
-            <div class="mb-16 text-center">
-                <h2 class="mb-6 text-4xl font-bold md:text-5xl">
-                    Funzionalità
-                    <span class="gradient-text"> Potenti</span>
-                </h2>
-                <p class="max-w-2xl mx-auto text-xl text-muted-foreground">
-                    Tutto quello che ti serve per esplorare i dati storici
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-                <div class="p-6 transition-all duration-300 glass-card hover:bg-card/70 hover:scale-105 rounded-xl">
-                    <i data-lucide="search" class="w-12 h-12 mb-4 text-primary"></i>
-                    <h3 class="mb-3 text-xl font-semibold text-foreground">
-                        Ricerca Avanzata
-                    </h3>
-                    <p class="leading-relaxed text-muted-foreground">
-                        Filtra e cerca attraverso i dati storici con potenti strumenti di ricerca
-                    </p>
-                </div>
-                
-                <div class="p-6 transition-all duration-300 glass-card hover:bg-card/70 hover:scale-105 rounded-xl">
-                    <i data-lucide="bar-chart-3" class="w-12 h-12 mb-4 text-primary"></i>
-                    <h3 class="mb-3 text-xl font-semibold text-foreground">
-                        Statistiche Dettagliate
-                    </h3>
-                    <p class="leading-relaxed text-muted-foreground">
-                        Visualizza analisi approfondite e statistiche demografiche storiche
-                    </p>
-                </div>
-                
-                <div class="p-6 transition-all duration-300 glass-card hover:bg-card/70 hover:scale-105 rounded-xl">
-                    <i data-lucide="users" class="w-12 h-12 mb-4 text-primary"></i>
-                    <h3 class="mb-3 text-xl font-semibold text-foreground">
-                        Gruppi Famigliari
-                    </h3>
-                    <p class="leading-relaxed text-muted-foreground">
-                        Esplora le strutture famigliari e le relazioni genealogiche
-                    </p>
-                </div>
-                
-                <div class="p-6 transition-all duration-300 glass-card hover:bg-card/70 hover:scale-105 rounded-xl">
-                    <i data-lucide="crown" class="w-12 h-12 mb-4 text-primary"></i>
-                    <h3 class="mb-3 text-xl font-semibold text-foreground">
-                        Titoli Nobiliari
-                    </h3>
-                    <p class="leading-relaxed text-muted-foreground">
-                        Analizza la distribuzione dei titoli nobiliari nei censimenti
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Preview Section -->
-    <section class="relative py-20">
-        <div class="container px-6 mx-auto">
-            <div class="mb-16 text-center">
-                <h2 class="mb-6 text-4xl font-bold md:text-5xl">
-                    Esempio di
-                    <span class="gradient-text"> Censimento</span>
-                </h2>
-                <p class="max-w-2xl mx-auto text-xl text-muted-foreground">
-                    Ecco come appaiono i dati storici nell'interfaccia
-                </p>
-            </div>
-            
-            <!-- Esempio di Censimento -->
-            <div class="max-w-5xl mx-auto">
-                <div class="p-8 glass-card rounded-xl">
-                    <div class="mb-6">
-                        <h3 class="mb-2 text-2xl font-bold text-center">Censimento di Crema 1592-93</h3>
-                        <p class="text-center text-muted-foreground">Nomi, Cognomi, Titoli e altri dati</p>
-                    </div>
-                    <div class="overflow-x-auto sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 border rounded-lg dark:text-gray-400 border-border bg-white/80 dark:bg-gray-800/80">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Gruppo Famigliare</th>
-                                    <th scope="col" class="px-6 py-3">Nome</th>
-                                    <th scope="col" class="px-6 py-3">Cognome</th>
-                                    <th scope="col" class="px-6 py-3">Titolo</th>
-                                    <th scope="col" class="px-6 py-3">Età</th>
-                                    <th scope="col" class="px-6 py-3">Padre</th>
-                                    <th scope="col" class="px-6 py-3">Ruolo</th>
-                                    <th scope="col" class="px-6 py-3">Residenza</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="border-b border-gray-200 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">1</th>
-                                    <td class="px-6 py-4">Lorenzo</td>
-                                    <td class="px-6 py-4">de' Medici</td>
-                                    <td class="px-6 py-4">Signore</td>
-                                    <td class="px-6 py-4">45</td>
-                                    <td class="px-6 py-4">Piero</td>
-                                    <td class="px-6 py-4">Capofamiglia</td>
-                                    <td class="px-6 py-4">Via Roma</td>
-                                </tr>
-                                <tr class="border-b border-gray-200 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">1</th>
-                                    <td class="px-6 py-4">Lucrezia</td>
-                                    <td class="px-6 py-4">de' Medici</td>
-                                    <td class="px-6 py-4">Nobile</td>
-                                    <td class="px-6 py-4">42</td>
-                                    <td class="px-6 py-4">Bartolomeo</td>
-                                    <td class="px-6 py-4">Moglie</td>
-                                    <td class="px-6 py-4">Via Roma</td>
-                                </tr>
-                                <tr class="border-b border-gray-200 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">2</th>
-                                    <td class="px-6 py-4">Francesco</td>
-                                    <td class="px-6 py-4">Pazzi</td>
-                                    <td class="px-6 py-4">Mercante</td>
-                                    <td class="px-6 py-4">38</td>
-                                    <td class="px-6 py-4">Giovanni</td>
-                                    <td class="px-6 py-4">Capofamiglia</td>
-                                    <td class="px-6 py-4">Via Ghibellina</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-border bg-card/20">
-        <div class="container px-6 mx-auto">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-                <div class="col-span-1 md:col-span-2">
-                    <div class="mb-4 text-2xl font-bold gradient-text">
-                        Censimento Storico
-                    </div>
-                    <p class="max-w-md mb-4 text-muted-foreground">
-                        La piattaforma per esplorare e analizzare i dati dei censimenti storici, 
-                        preservando la memoria genealogica e demografica del passato.
-                    </p>
-                </div>
-                
-                <div>
-                    <h4 class="mb-4 font-semibold text-foreground">Esplora</h4>
-                    <ul class="space-y-2 text-muted-foreground">
-                        <li><a href="{{ url_for('main.info') }}" class="transition-colors hover:text-foreground">Info Generali</a></li>
-                        <li><a href="{{ url_for('main.statistiche') }}" class="transition-colors hover:text-foreground">Statistiche</a></li>
-                        <li><a href="{{ url_for('main.classifiche') }}" class="transition-colors hover:text-foreground">Classifiche</a></li>
-                        <li><a href="{{ url_for('main.creator') }}" class="transition-colors hover:text-foreground">Creators</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="mb-4 font-semibold text-foreground">Supporto</h4>
-                    <ul class="space-y-2 text-muted-foreground">
-                        <li><a href="#" class="transition-colors hover:text-foreground">Contatti</a></li>
-                        <li><a href="wiki.html" class="transition-colors hover:text-foreground">Guida</a></li>
-                        <li><a href="#" class="transition-colors hover:text-foreground">Privacy</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="pt-8 mt-8 text-center border-t border-border text-muted-foreground">
-                <p>&copy; 2024 Censimento Storico. Tutti i diritti riservati.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Initialize Lucide Icons -->
-    <script>
-        lucide.createIcons();
-    </script>
-    
-    <!-- Smooth scrolling -->
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                    }
+                });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>

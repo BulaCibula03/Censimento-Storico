@@ -154,3 +154,7 @@ def info():
 @bp.route('/classifiche', methods=['GET'])
 def classifiche():
     return render_template('classifiche.html', dati_caricati = bool(funzioni.my_list))
+
+@bp.route('/wiki', methods=['GET'])
+def wiki():
+    return render_template('wiki.html')
