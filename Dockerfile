@@ -1,54 +1,42 @@
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=20.19.2
+FROM node:${NODE_VERSION}-alpine AS base
 
-################################################################################
-FROM node:20-slim AS base
+RUN apk add --no-cache python3 py3-pip
 
-RUN apt-get update \
- && apt-get install -y python3 python3-pip \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
-
+WORKDIR /usr/src/app
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN python3 -m venv /venv && /venv/bin/pip install --no-cache-dir -r requirements.txt
+
+ENV PATH="/venv/bin:$PATH"
 
 WORKDIR /usr/src/app
 
+FROM base AS deps
 
-################################################################################
-FROM base as deps
-
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
-
-################################################################################
-FROM deps as build
-
-# Installa le dipendenze di sviluppo
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
     npm ci
 
+FROM deps AS builder
+
 COPY . .
 
-RUN npm run build
+RUN npm run build || echo "No build script"
 
-################################################################################
-FROM base as final
+FROM node:${NODE_VERSION}-alpine AS runtime
 
-ENV NODE_ENV production
+RUN apk add --no-cache python3 py3-pip
 
-USER node
+WORKDIR /usr/src/app
 
-COPY package.json .
+COPY --from=base /venv /venv
+COPY --from=builder /usr/src/app /usr/src/app
 
-COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/static/css ./static/css
+ENV PATH="/venv/bin:$PATH"
 
 EXPOSE 5000
 
-CMD npm run dev
+CMD ["sh", "-c", "npm run dev"]

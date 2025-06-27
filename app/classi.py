@@ -28,3 +28,5 @@ class persona:
         print("ruolo: ",self.ruolo)
         print("gruppo famigliare: ",self.gruppoFamigliare)
         print("residenza: ",self.residenza)
+# 
+#aspetta un attimo che risolvo una cosa
