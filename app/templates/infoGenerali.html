@@ -20,7 +20,7 @@
                         </div>
                         <div class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
                             <div class="flex items-center w-full space-x-3 md:w-auto">
-                                <button id="exportButton" type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                <button onclick="esportaCSV()" id="exportButton" name="exportButton" type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                     <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                     </svg>
@@ -244,37 +244,74 @@
             });
 
             aggiornaTabella();
-
+            
             function esportaCSV() {
-                if(!allData||allData.length === 0) {
+                if (!allData || allData.length === 0) {
                     alert("Nessun dato da esportare.");
                     return;
                 }
-                const intestazioni=["Gruppo Famigliare", "Nome", "Cognome", "Titolo", "Età", "Padre", "Ruolo", "Residenza"];
-                const righe=allData.map(p =>
-                    [
-                        p.gruppo_famigliare,
-                        p.nome,
-                        p.cognome,
-                        p.titolo,
-                        p.eta,
-                        p.padre,
-                        p.ruolo,
-                        p.residenza
-                    ].map(val => `"${(val || "").toString().replace(/"/g, '""')}"`).join(",")
-                );
-                const csvContent=[intestazioni.join(","), ...righe].join("\n");
-                const blob=new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-                const link=document.createElement("a");
-                const url=URL.createObjectURL(blob);
 
-                link.setAttribute("href",url);
-                link.setAttribute("download","abitanti_crema.csv");
-                link.style.visibility="hidden";
+                const intestazioniGruppo = [
+                    "Gruppo",
+                    "Media Componenti",
+                    "Diff Età Marito-Moglie",
+                    "Età Primo Figlio"
+                ];
+
+                const intestazioniMembro = [
+                    "Nome",
+                    "Cognome",
+                    "Titolo",
+                    "Età",
+                    "Padre",
+                    "Ruolo",
+                    "Residenza"
+                ];
+
+                const righe = [];
+                let ultimoGruppo = null;
+
+                allData.forEach(p => {
+                    const gruppo = p.gruppo_famigliare;
+
+                    if (gruppo !== ultimoGruppo) {
+                        ultimoGruppo = gruppo;
+                        const info = gruppiInfo[gruppo];
+
+                        righe.push(intestazioniGruppo.join(","));
+
+                        righe.push([
+                            `Gruppo ${info.numero}`,
+                            info.media_componenti,
+                            info.diff_eta,
+                            info.eta_primo_figlio
+                        ].map(val => (val !== undefined && val !== null ? val.toString().replace(/"/g, '') : '')).join(","));
+
+                        righe.push(intestazioniMembro.join(","));
+                    }
+
+                    righe.push([
+                        p.nome ?? "",
+                        p.cognome ?? "",
+                        p.titolo ?? "",
+                        p.eta ?? "",
+                        p.padre ?? "",
+                        p.ruolo ?? "",
+                        p.residenza ?? ""
+                    ].map(val => (val !== undefined && val !== null ? val.toString().replace(/"/g, '') : '')).join(","));
+                });
+
+                const csvContent = righe.join("\n");
+                const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+
+                link.setAttribute("href", url);
+                link.setAttribute("download", "InfogeneraliAbitanti.csv");
+                link.style.visibility = "hidden";
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
             }
-            document.getElementById("exportButton").addEventListener("click", esportaCSV);
         </script>
     {% endblock %}

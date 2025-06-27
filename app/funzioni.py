@@ -102,6 +102,8 @@ def etaMediaConiugi(lista):
     nVedova = 0
     totCapofamigliaVedovo = 0
     nCapofamigliaVedovo = 0
+    totMoglie = 0
+    nMoglie = 0
     for persona in lista:
         if persona.ruolo == "capofamiglia":
             totCapofamiglia += persona.eta
@@ -115,7 +117,10 @@ def etaMediaConiugi(lista):
         elif persona.ruolo == "capofamiglia vedovo":
             totCapofamigliaVedovo += persona.eta
             nCapofamigliaVedovo += 1
-    return [int(totCapofamiglia/nCapofamiglia),int(totMaterFamilias/nMaterFamilias),int(totVedova/nVedova),int(totCapofamigliaVedovo/nCapofamigliaVedovo)]
+        elif persona.ruolo == "moglie":
+            totMoglie +=persona.eta
+            nMoglie += 1
+    return [int(totCapofamiglia/nCapofamiglia),int(totMoglie/nMoglie),int(totMaterFamilias/nMaterFamilias),int(totVedova/nVedova),int(totCapofamigliaVedovo/nCapofamigliaVedovo)]
 
 def differenzaEtaConiugi(lista):
     lista = sorted(lista, key=lambda x: x.gruppoFamigliare)

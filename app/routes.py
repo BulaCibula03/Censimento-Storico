@@ -107,7 +107,7 @@ def statistiche():
     etaGenerale = funzioni.mediaEta(funzioni.my_list)
     etaServitu = funzioni.etaServitu(funzioni.my_list)
     etaGruppi = funzioni.mediaEtaGruppiFamigliari(funzioni.my_list)
-    etaMogli = funzioni.etaMediaConiugi(funzioni.my_list)[1]  # Mater familias
+    etaMogli = funzioni.etaMediaConiugi(funzioni.my_list)[1]  # Moglie
     etaMariti = funzioni.etaMediaConiugi(funzioni.my_list)[0] # Capofamiglia
     etaNobili = funzioni.differenzaEtaTraClassi(funzioni.my_list)[0]
     etaBorghesi = funzioni.differenzaEtaTraClassi(funzioni.my_list)[1]
