@@ -10,59 +10,65 @@ Questo progetto nasce con l'obiettivo di offrire una piattaforma interattiva per
 
 ## Funzionalità Principali
 
-- **Caricamento e visualizzazione dati storici**: carica il tuo file di censimento per esplorarne i dati.
-- **Ricerca avanzata**: filtra e cerca tra i dati storici con strumenti potenti e flessibili.
-- **Statistiche dettagliate**: visualizza analisi approfondite su età, composizione dei nuclei familiari, titoli, suddivisione per quartieri, ecc.
-- **Classifiche dinamiche**: consulta classifiche di nomi, cognomi, titoli e altre informazioni genealogiche.
-- **Analisi demografiche**: età media, distribuzione per età e genere, suddivisione per quartieri, struttura dei gruppi familiari.
-- **Esempio integrato**: dati demo di un censimento storico (es. “Censimento di Crema 1592-93”) per mostrare le potenzialità dell’applicazione.
-- **Interfaccia moderna**: interfaccia responsive realizzata con HTML, CSS (Tailwind), JavaScript e Python (backend).
+- **Caricamento e visualizzazione dati storici**
+- **Ricerca avanzata**
+- **Statistiche dettagliate**
+- **Classifiche dinamiche**
+- **Analisi demografiche**
+- **Dati demo integrati**
+- **Interfaccia moderna** con TailwindCSS, Flask e strumenti frontend moderni
 
 ## Tecnologie Utilizzate
 
-- **Frontend**: HTML, CSS (Tailwind CSS), JavaScript
+- **Frontend**: HTML, Tailwind CSS, JavaScript
 - **Backend**: Python, Flask
-- **Gestione dati**: Pandas, librerie Python custom per analisi storica
-- **Build & Tooling**: Node.js, npm
+- **Build**: Docker, Node.js, npm
+- **Analisi**: pandas, librerie custom Python
 
-## Avvio rapido
+---
+
+## Avvio
 
 1. **Clona il repository**
-   ```bash
-   git clone https://github.com/BulaCibula03/Tirocinio.git
-   cd Tirocinio
-   ```
 
-2. **Installa le dipendenze**
-   > Assicurati di avere Python 3.x, Node.js e npm installati
+```bash
+git clone https://github.com/BulaCibula03/Tirocinio.git
+cd Tirocinio
+```
+2. **Rendi eseguibili gli script di esecuzione e di stop**
+```bash
+chmod +x start.sh
+chmod +x stop.sh
+```
 
-   ```bash
-   pip install -r requirements.txt
-   npm install
-   ```
+3. **Costruisci e avvia la webapp**
+```bash
+./start.sh
+```
 
-3. **Avvia il server**
-   ```bash
-   npm run dev
-   ```
+4. **Accedi alla webapp**
+   Vai su [http://localhost:5000](http://localhost:5000)
+   
+5. **Ferma la webapp**
+```bash
+./stop.sh
+```
 
-4. **Apri il browser**
-   Vai su [http://localhost:5000](http://localhost:5000) per utilizzare la webapp.
+---
 
 ## Struttura del progetto
 
-- `/app/templates/` – Template HTML dell’interfaccia
-- `/app/static/` – File statici (CSS, JS, immagini)
+- `/app/templates/` – Template HTML
+- `/app/static/` – File statici (CSS, JS)
 - `/app/funzioni.py` – Funzioni di analisi sui dati storici
-- `/app/routes.py` – Rotte e API Python/Flask
+- `/app/routes.py` – Rotte e logica Flask
 - `/requirements.txt` – Dipendenze Python
+- `/Dockerfile` – Dockerfile multi-stage con Python, Node e Tailwind
+- `/docker-compose.yml` – Definizione dei servizi
+- `/package.json` - Definizione dei plugin e servizi Node.js
+- `/tailwind.config.js` - Configurazioni Tailwind CSS
 
-## Esempio di utilizzo
-
-1. Carica un file di censimento storico tramite l’interfaccia web.
-2. Esplora i dati: visualizza persone, famiglie, quartieri, titoli, ecc.
-3. Utilizza la ricerca avanzata e le funzioni di filtro.
-4. Analizza le statistiche e le classifiche demografiche.
+---
 
 ## Contributi
 
