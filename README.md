@@ -6,7 +6,7 @@
 
 ## Descrizione
 
-Questo progetto nasce con l'obiettivo di offrire una piattaforma interattiva per l'esplorazione e l’analisi di dati storici provenienti da censimenti. Permette di scoprire nomi, cognomi, titoli nobiliari, statistiche demografiche e strutture familiari del passato, facilitando la ricerca genealogica e la comprensione delle comunità storiche.
+Questo progetto nasce con l'obiettivo di offrire una piattaforma interattiva per l’esplorazione e l’analisi di dati storici provenienti da censimenti. Permette di scoprire nomi, cognomi, titoli nobiliari, statistiche demografiche e strutture familiari del passato, facilitando la ricerca genealogica e la comprensione delle comunità storiche.
 
 ## Funzionalità Principali
 
@@ -29,30 +29,69 @@ Questo progetto nasce con l'obiettivo di offrire una piattaforma interattiva per
 
 ## Avvio
 
-1. **Clona il repository**
+### 1. Clona il repository
 
 ```bash
 git clone https://github.com/BulaCibula03/Tirocinio.git
 cd Tirocinio
 ```
-2. **Rendi eseguibili gli script di esecuzione e di stop**
+
+### 2. Rendi eseguibili gli script (solo su Linux/macOS)
+
 ```bash
 chmod +x start.sh
 chmod +x stop.sh
 ```
 
-3. **Costruisci e avvia la webapp**
+---
+
+### 3. Avvia la webapp
+
+- **Linux/macOS**:
+
 ```bash
 ./start.sh
 ```
 
-4. **Accedi alla webapp**
-   Vai su [http://localhost:5000](http://localhost:5000)
-   
-5. **Ferma la webapp**
+- **Windows**:
+
+    - CMD:
+      ```cmd
+      start.cmd
+      ```
+
+    - PowerShell:
+      ```powershell
+      .\start.cmd
+      ```
+
+---
+
+### 4. Accedi alla webapp
+
+Apri il browser su: [http://localhost:5000](http://localhost:5000)
+
+---
+
+### 5. Ferma la webapp
+
+- **Linux/macOS**:
+
 ```bash
 ./stop.sh
 ```
+
+- **Windows**:
+
+    - CMD:
+      ```cmd
+      stop.cmd
+      ```
+
+    - PowerShell:
+      ```powershell
+      .\stop.cmd
+      ```
 
 ---
 
@@ -65,8 +104,8 @@ chmod +x stop.sh
 - `/requirements.txt` – Dipendenze Python
 - `/Dockerfile` – Dockerfile multi-stage con Python, Node e Tailwind
 - `/docker-compose.yml` – Definizione dei servizi
-- `/package.json` - Definizione dei plugin e servizi Node.js
-- `/tailwind.config.js` - Configurazioni Tailwind CSS
+- `/package.json` – Dipendenze e script Node.js
+- `/tailwind.config.js` – Configurazioni Tailwind CSS
 
 ---
 
