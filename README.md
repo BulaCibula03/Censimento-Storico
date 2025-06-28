@@ -60,11 +60,6 @@ chmod +x stop.sh
       start.cmd
       ```
 
-    - PowerShell:
-      ```powershell
-      .\start.cmd
-      ```
-
 ---
 
 ### 4. Accedi alla webapp
@@ -88,10 +83,24 @@ Apri il browser su: [http://localhost:5000](http://localhost:5000)
       stop.cmd
       ```
 
-    - PowerShell:
-      ```powershell
-      .\stop.cmd
-      ```
+
+**Nota per utenti Windows (PowerShell)**  
+Se l'esecuzione degli script `.ps1` è bloccata, potresti dover modificare la policy di esecuzione:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Conferma con `S` (Yes) quando richiesto.  
+Dopodiché potrai avviare gli script con:
+
+```powershell
+.\start.ps1
+```
+e fermare con:
+```powershell
+.\stop.ps1
+```
 
 ---
 
