@@ -28,7 +28,7 @@ def creaIstanze(df):
             eta = float(eta_str)
         except ValueError:
             eta = 0
-        p = classi.persona(str(row['titolo']).lower(),str(row['nome']),str(row['cognome']),str(row['figlio di']),eta,str(row['ruolo']),str(row['residenza']),classi.nGruppoFamigliare)
+        p = classi.persona(str(row['titolo']).lower().strip(),str(row['nome']).strip(),str(row['cognome']).strip(),str(row['figlio di']).strip(),eta,str(row['ruolo']).strip(),str(row['residenza']).strip(),classi.nGruppoFamigliare)
         p.stampa()
         my_list.append(p)
     return my_list
