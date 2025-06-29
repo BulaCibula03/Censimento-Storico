@@ -54,7 +54,13 @@
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
                                 Età media dei gruppi famigliari
                             </th>
-                            <td class="px-6 py-4">{{ etaGruppi }}</td>
+                            <td class="px-6 py-4">
+                                {
+                                {% for gruppo, eta in etaGruppi.items() %}
+                                    <span class="gruppo-bold">{{gruppo}}</span>:{{eta}}{% if not loop.last %},{% endif %}
+                                {% endfor %}
+                                }
+                            </td>
                         </tr>
                         <tr class="border-b border-gray-200 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
@@ -188,6 +194,10 @@
                 }
                 textarea{
                     color:black
+                }
+                .gruppo-bold{
+                    font-weight:bold;
+                    font-size:inherit;
                 }
             </style>
     {% endblock %}
