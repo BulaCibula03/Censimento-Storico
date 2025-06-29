@@ -13,7 +13,7 @@ def create_app():
     )
     
     app.config['SECRET_KEY'] = 'BVAKHKVJVABKL'
-    app.config['DEBUG'] = True # Imposta a False in produzione!
+    app.config['DEBUG'] = True
 
     from .routes import bp
     app.register_blueprint(bp)

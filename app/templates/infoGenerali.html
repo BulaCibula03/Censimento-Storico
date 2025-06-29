@@ -138,7 +138,8 @@
                     (!searchTerm) ||
                     (persona.nome && persona.nome.toLowerCase().includes(searchTerm)) ||
                     (persona.cognome && persona.cognome.toLowerCase().includes(searchTerm)) ||
-                    (persona.titolo && persona.titolo.toLowerCase().includes(searchTerm))
+                    (persona.titolo && persona.titolo.toLowerCase().includes(searchTerm)) ||
+                    (persona.residenza && persona.residenza.toLowerCase().includes(searchTerm))
                 );
 
                 for (let i = start; i < filtered.length && shown < rowsPerPage; i++) {
@@ -174,8 +175,7 @@
                 updatePagination(page, filtered.length);
             }
 
-            function updatePagination(page) {
-                const totalRows = typeof totalRowsOverride === "number" ? totalRowsOverride : allData.length;
+            function updatePagination(page, totalRows) {
                 const totalPages = Math.ceil(totalRows / rowsPerPage);
                 const pagBar = document.getElementById("pagination-bar");
                 const pagInfo = document.getElementById("pagination-info");
