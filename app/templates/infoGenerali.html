@@ -126,7 +126,8 @@
                 currentPage = 1;
                 renderTablePage(currentPage);
             });
-
+            
+            let filtered = [];
             function renderTablePage(page) {
                 const tbody = document.querySelector("table tbody");
                 tbody.innerHTML = "";
@@ -134,7 +135,7 @@
                 let start = (page - 1) * rowsPerPage;
                 let shown = 0;
 
-                const filtered = allData.filter(persona =>
+                filtered = allData.filter(persona =>
                     (!searchTerm) ||
                     (persona.nome && persona.nome.toLowerCase().includes(searchTerm)) ||
                     (persona.cognome && persona.cognome.toLowerCase().includes(searchTerm)) ||
@@ -247,7 +248,7 @@
             aggiornaTabella();
             
             function esportaCSV() {
-                if (!allData || allData.length === 0) {
+                if (!filtered|| filtered.length === 0) {
                     alert("Nessun dato da esportare.");
                     return;
                 }
@@ -272,7 +273,7 @@
                 const righe = [];
                 let ultimoGruppo = null;
 
-                allData.forEach(p => {
+                filtered.forEach(p => {
                     const gruppo = p.gruppo_famigliare;
 
                     if (gruppo !== ultimoGruppo) {
