@@ -248,19 +248,15 @@
             aggiornaTabella();
             
             function esportaCSV() {
-                if (!filtered|| filtered.length === 0) {
+                if (!filtered || filtered.length === 0) {
                     alert("Nessun dato da esportare.");
                     return;
                 }
-
-                const intestazioniGruppo = [
+                const intestazioni = [
                     "Gruppo",
                     "Media Componenti",
                     "Diff Età Marito-Moglie",
-                    "Età Primo Figlio"
-                ];
-
-                const intestazioniMembro = [
+                    "Età Primo Figlio",
                     "Nome",
                     "Cognome",
                     "Titolo",
@@ -269,45 +265,45 @@
                     "Ruolo",
                     "Residenza"
                 ];
-
-                const righe = [];
+                const righe = [intestazioni.join(",")];
                 let ultimoGruppo = null;
-
                 filtered.forEach(p => {
                     const gruppo = p.gruppo_famigliare;
+                    const info = gruppiInfo[gruppo];
 
                     if (gruppo !== ultimoGruppo) {
                         ultimoGruppo = gruppo;
-                        const info = gruppiInfo[gruppo];
-
-                        righe.push(intestazioniGruppo.join(","));
-
                         righe.push([
                             `Gruppo ${info.numero}`,
-                            info.media_componenti,
-                            info.diff_eta,
-                            info.eta_primo_figlio
-                        ].map(val => (val !== undefined && val !== null ? val.toString().replace(/"/g, '') : '')).join(","));
-
-                        righe.push(intestazioniMembro.join(","));
+                            info.media_componenti ?? "",
+                            info.diff_eta ?? "",
+                            info.eta_primo_figlio ?? "",
+                            p.nome ?? "",
+                            p.cognome ?? "",
+                            p.titolo ?? "",
+                            p.eta ?? "",
+                            p.padre ?? "",
+                            p.ruolo ?? "",
+                            p.residenza ?? ""
+                        ].map(val => val.toString().replace(/"/g, '')).join(","));
+                    } else {
+                        righe.push([
+                            "", "", "", "",
+                            p.nome ?? "",
+                            p.cognome ?? "",
+                            p.titolo ?? "",
+                            p.eta ?? "",
+                            p.padre ?? "",
+                            p.ruolo ?? "",
+                            p.residenza ?? ""
+                        ].map(val => val.toString().replace(/"/g, '')).join(","));
                     }
-
-                    righe.push([
-                        p.nome ?? "",
-                        p.cognome ?? "",
-                        p.titolo ?? "",
-                        p.eta ?? "",
-                        p.padre ?? "",
-                        p.ruolo ?? "",
-                        p.residenza ?? ""
-                    ].map(val => (val !== undefined && val !== null ? val.toString().replace(/"/g, '') : '')).join(","));
                 });
 
                 const csvContent = righe.join("\n");
                 const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement("a");
-
                 link.setAttribute("href", url);
                 link.setAttribute("download", "InfogeneraliAbitanti.csv");
                 link.style.visibility = "hidden";
