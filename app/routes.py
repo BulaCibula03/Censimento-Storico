@@ -122,6 +122,8 @@ def statistiche():
     contaMaschi, contaFemmine = funzioni.contaMaschiFemmine(funzioni.my_list)
     etaMaschi = funzioni.mediaEta(funzioni.trovaMaschi(funzioni.my_list))
     etaFemmine = funzioni.mediaEta(funzioni.trovaFemmine(funzioni.my_list))
+    etaFiglie = funzioni.etaFiglie(funzioni.my_list)
+    etaFigli = funzioni.etaFigli(funzioni.my_list)
     return render_template(
         'statistiche.html',
         dati_caricati = bool(funzioni.my_list),
@@ -141,7 +143,9 @@ def statistiche():
         contaMaschi=contaMaschi,
         contaFemmine=contaFemmine,
         etaMaschi=etaMaschi,
-        etaFemmine=etaFemmine
+        etaFemmine=etaFemmine,
+        etaFiglie=etaFiglie,
+        etaFigli=etaFigli
     )
 
 @bp.route('/info', methods=['GET'])
