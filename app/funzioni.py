@@ -18,6 +18,7 @@
 #- Suddivisione per quartieri (Contrada della Piazza, Ghirolo ecc.)     //FATTA
 from collections import Counter
 from . import classi
+from collections import defaultdict
 my_list = []
 
 def creaIstanze(df):
@@ -355,3 +356,25 @@ def info_gruppi(lista):
             "eta_primo_figlio": eta_primo.get(n_gruppo, "")
         }
     return gruppi
+def etaFiglie(lista):
+    figliePerGruppo=defaultdict(list)
+
+    for persona in lista:
+        if persona.ruolo.strip().lower()=="figlia":
+            figliePerGruppo[persona.gruppoFamigliare].append(persona.eta)
+    mediaFiglie = {}
+    for gruppo, eta_lista in figliePerGruppo.items():
+        media= int(sum(eta_lista)/len(eta_lista)) if eta_lista else 0
+        mediaFiglie[gruppo] = media
+    return mediaFiglie
+
+def etaFigli(lista):
+    figliPerGruppo=defaultdict(list)
+    for persona in lista:
+        if persona.ruolo.strip().lower()=="figlio":
+            figliPerGruppo[persona.gruppoFamigliare].append(persona.eta)
+    mediaFigli = {}
+    for gruppo, eta_lista in figliPerGruppo.items():
+        media= int(sum(eta_lista)/len(eta_lista)) if eta_lista else 0
+        mediaFigli[gruppo] = media
+    return mediaFigli
