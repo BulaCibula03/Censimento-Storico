@@ -105,6 +105,30 @@
                             <td class="px-6 py-4">{{ sottoSedici }}</td>
                         </tr>
                         <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media figli dei gruppi famigliari
+                            </th>
+                            <td class="px-6 py-4">
+                                {
+                                {% for gruppo, eta in etaFigli.items() %}
+                                    <span class="gruppo-bold">{{gruppo}}</span>:{{eta}}{% if not loop.last %},{% endif %}
+                                {% endfor %}
+                                }
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                Età media figlie dei gruppi famigliari
+                            </th>
+                            <td class="px-6 py-4">
+                                {
+                                {% for gruppo, eta in etaFiglie.items() %}
+                                    <span class="gruppo-bold">{{gruppo}}</span>:{{eta}}{% if not loop.last %},{% endif %}
+                                {% endfor %}
+                                }
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
                             <th colspan="2" class="px-6 py-4 text-lg font-bold text-gray-900 bg-gray-100 dark:text-white dark:bg-gray-900">
                                 Dati età femmine
                             </th>
@@ -173,30 +197,6 @@
                                 Nella fascia d'età superiori ai 46 anni
                             </th>
                             <td class="px-6 py-4">{{ m4 }}</td>
-                        </tr>
-                        <tr class="border-b border-gray-200 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                Età media figli dei gruppi famigliari
-                            </th>
-                            <td class="px-6 py-4">
-                                {
-                                {% for gruppo, eta in etaFigli.items() %}
-                                    <span class="gruppo-bold">{{gruppo}}</span>:{{eta}}{% if not loop.last %},{% endif %}
-                                {% endfor %}
-                                }
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                Età media figlie dei gruppi famigliari
-                            </th>
-                            <td class="px-6 py-4">
-                                {
-                                {% for gruppo, eta in etaFiglie.items() %}
-                                    <span class="gruppo-bold">{{gruppo}}</span>:{{eta}}{% if not loop.last %},{% endif %}
-                                {% endfor %}
-                                }
-                            </td>
                         </tr>
                     </tbody>
                 </table>
