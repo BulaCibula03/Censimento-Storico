@@ -378,3 +378,19 @@ def etaFigli(lista):
         media= int(sum(eta_lista)/len(eta_lista)) if eta_lista else 0
         mediaFigli[gruppo] = media
     return mediaFigli
+def etaFiglietot(lista):
+    figlietotal=0
+    nFiglie=0
+    for persona in lista:
+        if persona.ruolo.strip().lower()=="figlia":
+            figlietotal+=persona.eta
+            nFiglie+=1
+    return round(figlietotal/nFiglie) if nFiglie > 0 else 0
+def etaFiglitot(lista):
+    figlitotal=0
+    nFigli=0
+    for persona in lista:
+        if persona.ruolo.strip().lower()=="figlio":
+            figlitotal+=persona.eta
+            nFigli+=1
+    return round(figlitotal/nFigli) if nFigli > 0 else 0
